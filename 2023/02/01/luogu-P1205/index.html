@@ -18,17 +18,17 @@
   <link 
     rel="icon" 
     href="https://ricky1140.github.io/blog-img/ricky.png">
-  <title>Hello World</title>
+  <title>洛谷P1205 Java解法</title>
   
     
       <meta 
         property="og:title" 
-        content="Hello World">
+        content="洛谷P1205 Java解法">
     
     
       <meta 
         property="og:url" 
-        content="https://ricky1140.github.io/2022/11/14/hello-world/index.html">
+        content="https://ricky1140.github.io/2023/02/01/luogu-P1205/index.html">
     
     
       <meta 
@@ -46,10 +46,10 @@
         content="article">
       <meta 
         property="og:article:published_time" 
-        content="2022-11-14">
+        content="2023-02-01">
       <meta 
         property="og:article:modified_time" 
-        content="2022-11-14">
+        content="2023-02-01">
       <meta 
         property="og:article:author" 
         content="Ricky">
@@ -340,7 +340,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+
       </div>
     </article>
   
@@ -438,21 +438,36 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      Hello World
+      洛谷P1205 Java解法
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2022-11-14T00:44:25.991Z">
+    <time datetime="2023-01-31T16:11:53.000Z">
       <i 
         class="iconfont icon-calendar" 
         style="margin-right: 2px;">
       </i>
-      <span>2022-11-14</span>
+      <span>2023-02-01</span>
     </time>
+    
+      <span class="dot"></span>
+      
+        <a 
+          href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" 
+          class="post-meta-link">
+          数据结构与算法
+        </a>
+      
+        <a 
+          href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%B4%9B%E8%B0%B7/" 
+          class="post-meta-link">
+          洛谷
+        </a>
+      
     
     
       <span class="dot"></span>
-      <span>75 字</span>
+      <span>922 字</span>
     
   </div>
   
@@ -460,19 +475,49 @@
   <div 
     id="section" 
     class="post-content">
-    <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="highlight"><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre>
+    <p>[P1205 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1205">USACO1.2] 方块转换 Transformations - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<hr>
+<p>这个题其实画了图就好写了！</p>
+<blockquote>
+<p>以输入输出样例为例，我们的初始方块为：</p>
+<p>​		@ - @</p>
+<p>​		 -  -  -</p>
+<p>​		@ @ -</p>
+<p>转换完的方块为：</p>
+<p>​		@ - @</p>
+<p>​		@ -  -</p>
+<p>​		 -  - @</p>
+<p>肉眼可见的旋转 90°</p>
+<p><del>如果是在纸上画的图可以转纸，电脑上画的就转脖子吧</del></p>
+</blockquote>
+<p>但在程序里转换我们怎么换呢？</p>
+<ul>
+<li><p>我们的数组是从左到右，从上到下</p>
+</li>
+<li><p>旋转 90° 后是从下到上，从左到右</p>
+</li>
+</ul>
+<p>对图形不敏感的也可以列数组位置：</p>
+<p>假设旋转前的方块记为 <code>a[][]</code> ，旋转后的方块记为 <code>t[][]</code></p>
+<p>那么：</p>
+<pre class="highlight"><span class="line">t[<span class="number">0</span>][<span class="number">0</span>] = a[<span class="number">2</span>][<span class="number">0</span>];</span><br><span class="line">t[<span class="number">0</span>][<span class="number">1</span>] = a[<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">t[<span class="number">0</span>][<span class="number">2</span>] = a[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">t[<span class="number">1</span>][<span class="number">0</span>] = a[<span class="number">2</span>][<span class="number">1</span>];</span><br><span class="line">t[<span class="number">1</span>][<span class="number">1</span>] = a[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">t[<span class="number">1</span>][<span class="number">2</span>] = a[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">t[<span class="number">2</span>][<span class="number">0</span>] = a[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line">t[<span class="number">2</span>][<span class="number">1</span>] = a[<span class="number">1</span>][<span class="number">2</span>];</span><br><span class="line">t[<span class="number">2</span>][<span class="number">2</span>] = a[<span class="number">0</span>][<span class="number">2</span>];</span><br></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="highlight"><span class="line">$ hexo server</span><br></pre>
+<p>这应该能看出来了吧！</p>
+<p>那么步骤 2 步骤 3 的旋转就是多调用几次旋转 90°</p>
+<p>接下来的步骤 4 还请看清楚再写，我就因为看错题了 wa 了（悲）</p>
+<p>按垂直线进行镜像，也可以画图，<del>我懒得在电脑上敲图了</del>这里直接写数组位置：</p>
+<pre class="highlight"><span class="line">t[<span class="number">0</span>][<span class="number">0</span>] = a[<span class="number">0</span>][<span class="number">2</span>];</span><br><span class="line">t[<span class="number">0</span>][<span class="number">1</span>] = a[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">t[<span class="number">0</span>][<span class="number">2</span>] = a[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">t[<span class="number">1</span>][<span class="number">0</span>] = a[<span class="number">1</span>][<span class="number">2</span>];</span><br><span class="line">t[<span class="number">1</span>][<span class="number">1</span>] = a[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">t[<span class="number">1</span>][<span class="number">2</span>] = a[<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">t[<span class="number">2</span>][<span class="number">0</span>] = a[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line">t[<span class="number">2</span>][<span class="number">1</span>] = a[<span class="number">2</span>][<span class="number">1</span>];</span><br><span class="line">t[<span class="number">2</span>][<span class="number">2</span>] = a[<span class="number">2</span>][<span class="number">0</span>];</span><br></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="highlight"><span class="line">$ hexo generate</span><br></pre>
+<p>步骤 5 就是组合以上步骤，步骤 6 就是直接对比两个方块是否相等，当以上操作都没有用的时候就执行步骤 7。</p>
+<p>那么思路总结完成！</p>
+<hr>
+<p>以下是踩坑记录！</p>
+<p>数组之间的对比不能用 equals() ，还没看原理，大概跟地址数值引用之类的概念有关系？</p>
+<p>以及最开始写旋转函数的时候懒得写初始化直接给等于传进去的数组了，导致地址一样，过渡数组的变化也影响到了本身。</p>
+<hr>
+<p>以下是源代码：</p>
+<pre class="highlight"><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">P1205</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">		</span><br><span class="line">		<span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> sc.nextInt();	</span><br><span class="line">		</span><br><span class="line">		String[] a = <span class="keyword">new</span> <span class="title class_">String</span>[n+<span class="number">1</span>];</span><br><span class="line">		String[] b = <span class="keyword">new</span> <span class="title class_">String</span>[n+<span class="number">1</span>];</span><br><span class="line">		</span><br><span class="line">		<span class="type">char</span>[][] c = <span class="keyword">new</span> <span class="title class_">char</span>[n][n];</span><br><span class="line">		<span class="type">char</span>[][] d = <span class="keyword">new</span> <span class="title class_">char</span>[n][n];</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">			a[i] = sc.nextLine();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">			b[i] = sc.nextLine();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">			c[i] = a[i + <span class="number">1</span>].toCharArray();</span><br><span class="line">			d[i] = b[i].toCharArray();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (identical(d, typeOne(c))) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (identical(d, typeTwo(c))) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;2&quot;</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (identical(d, typeThr(c))) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (identical(d, typeFour(c))) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;4&quot;</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (identical(d, c)) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;6&quot;</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="type">char</span>[][] temp = typeFour(c);</span><br><span class="line">			<span class="keyword">if</span> (identical(d,typeOne(temp)) || identical(d,typeTwo(temp)) || identical(d,typeThr(temp))) &#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;5&quot;</span>);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;7&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		sc.close();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="type">char</span>[][] typeOne(<span class="type">char</span>[][] a) &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> a.length;</span><br><span class="line">		<span class="type">char</span>[][] temp = <span class="keyword">new</span> <span class="title class_">char</span>[n][n];</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">				temp[i][j] = a[a.length - j - <span class="number">1</span>][i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="type">char</span>[][] typeTwo(<span class="type">char</span>[][] a) &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> a.length;</span><br><span class="line">		<span class="type">char</span>[][] temp = <span class="keyword">new</span> <span class="title class_">char</span>[n][n];</span><br><span class="line">		</span><br><span class="line">		temp = typeOne(a);</span><br><span class="line">		temp = typeOne(temp);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="type">char</span>[][] typeThr(<span class="type">char</span>[][] a) &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> a.length;</span><br><span class="line">		<span class="type">char</span>[][] temp = <span class="keyword">new</span> <span class="title class_">char</span>[n][n];</span><br><span class="line">		</span><br><span class="line">		temp = typeOne(a);</span><br><span class="line">		temp = typeOne(temp);</span><br><span class="line">		temp = typeOne(temp);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="type">char</span>[][] typeFour(<span class="type">char</span>[][] a) &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> a.length;</span><br><span class="line">		<span class="type">char</span>[][] temp = <span class="keyword">new</span> <span class="title class_">char</span>[n][n];</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">				temp[i][j] = a[i][n - j - <span class="number">1</span>];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">identical</span><span class="params">(<span class="type">char</span>[][] a, <span class="type">char</span>[][] b)</span> &#123;</span><br><span class="line">		<span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; a[<span class="number">0</span>].length; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (a[i][j] != b[i][j]) &#123;</span><br><span class="line">					flag = <span class="literal">false</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> flag;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="highlight"><span class="line">$ hexo deploy</span><br></pre>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
   </div>
   <div>
@@ -492,8 +537,8 @@
           <span style="font-weight: bold;">文章链接：</span><a 
             target="_blank" 
             rel="nofollow noopener noreferrer" 
-            href="https://ricky1140.github.io/2022/11/14/hello-world/">
-            https://ricky1140.github.io/2022/11/14/hello-world/
+            href="https://ricky1140.github.io/2023/02/01/luogu-P1205/">
+            https://ricky1140.github.io/2023/02/01/luogu-P1205/
           </a>
         </p>
         <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
@@ -503,20 +548,20 @@
 </article>
 <div class="nav">
   
-    <div class="nav-item-prev">
+  
+    <div class="nav-item-next">
       <a 
-        href="/2022/12/01/algorithm-00-01/" 
+        href="/2023/01/31/luogu-P1202/" 
         class="nav-link">
-        <i class="iconfont icon-left nav-prev-icon"></i>
         <div>
-          <div class="nav-label">上一篇</div>
+          <div class="nav-label">下一篇</div>
           
-            <div class="nav-title">新手班-01笔记 </div>
+            <div class="nav-title">洛谷P1202 Java解法 </div>
           
         </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
       </a>
     </div>
-  
   
 </div>
 
@@ -529,7 +574,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+
 </div>
             </main>
             <aside class="right-column">
@@ -543,7 +588,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+
     </article>
   
   

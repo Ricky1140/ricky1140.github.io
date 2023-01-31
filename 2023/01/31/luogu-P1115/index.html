@@ -18,17 +18,17 @@
   <link 
     rel="icon" 
     href="https://ricky1140.github.io/blog-img/ricky.png">
-  <title>归档</title>
+  <title>洛谷P1115 Java解法</title>
   
     
       <meta 
         property="og:title" 
-        content="归档">
+        content="洛谷P1115 Java解法">
     
     
       <meta 
         property="og:url" 
-        content="https://ricky1140.github.io/archives/index.html">
+        content="https://ricky1140.github.io/2023/01/31/luogu-P1115/index.html">
     
     
       <meta 
@@ -40,6 +40,26 @@
         property="og:img" 
         content="博客">
     
+    
+      <meta 
+        property="og:type" 
+        content="article">
+      <meta 
+        property="og:article:published_time" 
+        content="2023-01-31">
+      <meta 
+        property="og:article:modified_time" 
+        content="2023-01-31">
+      <meta 
+        property="og:article:author" 
+        content="Ricky">
+      
+        
+          <meta 
+            property="og:article:tag" 
+            content="dp">
+        
+      
     
   
   
@@ -56,6 +76,8 @@
   <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
   
   
+  
+    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
   
   <script>
     function loadScript(url, cb) {
@@ -314,6 +336,18 @@
                <div class="sticky-tablet">
   
   
+    <article class="display-when-two-columns spacer">
+      <div class="card card-content toc-card">
+        <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+
+      </div>
+    </article>
+  
   
   <article class="card card-content categories-widget">
     <div class="categories-card">
@@ -401,203 +435,175 @@
   </article>
   
   
-    <article class="card card-content widescreen-archive archive-widget">
-      <div class="archive-card">
-  <div class="archive-card-header">
-    <i 
-      class="iconfont icon-wodebaobiao" 
-      style="padding-right: 2px;">
-    </i>归档
-  </div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-          <a 
-            href="/archives/2023" 
-            class="archive-card-list-item">
-            2023
-            <span class="archive-card-list-item-badge">5</span>
-          </a>
-        
-        
-        
-      
-    
-      
-        
-      
-    
-    
-      <a 
-        href="/archives/2022" 
-        class="archive-card-list-item">
-        2022
-        <span class="archive-card-list-item-badge">2</span>
-      </a>
-    
-  </div>
-</div>
-    </article>
-  
 </div>
             </aside>
             <main class="main-column">
               
-<div class="card card-content">
-  <h1 class="widget-title">归档</h1>
-</div>
-<div class="archive-timeline">
-  
-  
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      洛谷P1115 Java解法
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2023-01-31T15:35:45.000Z">
+      <i 
+        class="iconfont icon-calendar" 
+        style="margin-right: 2px;">
+      </i>
+      <span>2023-01-31</span>
+    </time>
     
-      <div class="archive-timeline-tag"><span>2023</span></div>
+      <span class="dot"></span>
+      
+        <a 
+          href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" 
+          class="post-meta-link">
+          数据结构与算法
+        </a>
+      
+        <a 
+          href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%B4%9B%E8%B0%B7/" 
+          class="post-meta-link">
+          洛谷
+        </a>
       
     
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2023-02-01</div>
-          <div class="archive-timeline-post-content">
-            <a 
-              href="/2023/02/01/luogu-P1205/"
-              class="archive-timeline-post-item">
-              洛谷P1205 Java解法
-            </a>
-          </div>
-        </div>
+    
+      <span class="dot"></span>
+      <span>305 字</span>
+    
+  </div>
+  
+    <div 
+      class="post-meta post-show-meta" 
+      style="margin-top: -10px;">
+      <div style="display: flex; align-items: center;">
+        <i 
+          class="iconfont icon-biaoqian" 
+          style="margin-right: 2px; font-size: 1.15rem;">
+        </i>
+        
+          
+          <a 
+            href="/tags/dp/" 
+            class="post-meta-link">
+            dp
+          </a>
+        
       </div>
     </div>
   
+  </header>
+  <div 
+    id="section" 
+    class="post-content">
+    <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1115">P1115 最大子段和 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<hr>
+<p>完全不会动态规划所以直接抄的题解（悲）</p>
+<p>所以这一篇来分析代码吧！</p>
+<hr>
+<p>题目写得挺诱导人的，我最开始一直在想怎么才能取区间，但其实根本不需要区间只需要最大值（恼）</p>
+<p>这里我们使用边读边算的做法。</p>
+<p>n 是用来接第一个数的，同时也是循环条件。</p>
+<p>a 用来每轮循环读一个数进行计算。</p>
+<p>ans 是要输出的结果，设置初始值为 <code>1 &lt;&lt; 31</code>  的原因是中间有个测试点是负数，不知道位运算是怎么算的直接移步到算法新手班 01 课的笔记吧</p>
+<blockquote>
+<p><a href="https://ricky1140.github.io/2022/12/01/algorithm-freshman-01/">00-01笔记 (ricky1140.github.io)</a></p>
+</blockquote>
+<p>now 用来记录现在的子段和，并和 ans 比较谁更大。</p>
+<hr>
+<p>以下为完整代码：</p>
+<pre class="highlight"><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">P1115</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">		</span><br><span class="line">		<span class="type">int</span> n;</span><br><span class="line">		<span class="type">int</span> a;</span><br><span class="line">		<span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">1</span> &lt;&lt; <span class="number">31</span>;</span><br><span class="line">		<span class="type">int</span> <span class="variable">now</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		</span><br><span class="line">		n = sc.nextInt();</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line">			a = sc.nextInt();</span><br><span class="line">			now += a;</span><br><span class="line">			<span class="keyword">if</span> (now &gt; ans) ans = now;</span><br><span class="line">			<span class="keyword">if</span> (now &lt; <span class="number">0</span>) now = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		System.out.println(ans);</span><br><span class="line">		</span><br><span class="line">		sc.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<hr>
+<p><del>别偷懒哩快去看课吧（恼）</del></p>
+
+  </div>
+  <div>
     
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2023-01-31</div>
-          <div class="archive-timeline-post-content">
-            <a 
-              href="/2023/01/31/luogu-P1202/"
-              class="archive-timeline-post-item">
-              洛谷P1202 Java解法
-            </a>
-          </div>
-        </div>
+      <div 
+        class="post-note note-warning copyright" 
+        style="margin-top: 42px">
+        <p>
+          <span style="font-weight: bold;">作者：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="/about">
+            Ricky
+          </a>
+        </p>
+        <p>
+          <span style="font-weight: bold;">文章链接：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="https://ricky1140.github.io/2023/01/31/luogu-P1115/">
+            https://ricky1140.github.io/2023/01/31/luogu-P1115/
+          </a>
+        </p>
+        <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
       </div>
+    
+  </div>
+</article>
+<div class="nav">
+  
+    <div class="nav-item-prev">
+      <a 
+        href="/2023/01/31/luogu-P1202/" 
+        class="nav-link">
+        <i class="iconfont icon-left nav-prev-icon"></i>
+        <div>
+          <div class="nav-label">上一篇</div>
+          
+            <div class="nav-title">洛谷P1202 Java解法 </div>
+          
+        </div>
+      </a>
     </div>
   
-    
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2023-01-31</div>
-          <div class="archive-timeline-post-content">
-            <a 
-              href="/2023/01/31/luogu-P1115/"
-              class="archive-timeline-post-item">
-              洛谷P1115 Java解法
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
   
-    
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2023-01-31</div>
-          <div class="archive-timeline-post-content">
-            <a 
-              href="/2023/01/31/luogu-P1097/"
-              class="archive-timeline-post-item">
-              洛谷P1097 Java解法
-            </a>
-          </div>
+    <div class="nav-item-next">
+      <a 
+        href="/2023/01/31/luogu-P1097/" 
+        class="nav-link">
+        <div>
+          <div class="nav-label">下一篇</div>
+          
+            <div class="nav-title">洛谷P1097 Java解法 </div>
+          
         </div>
-      </div>
-    </div>
-  
-    
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2023-01-30</div>
-          <div class="archive-timeline-post-content">
-            <a 
-              href="/2023/01/30/luogu-P1572/"
-              class="archive-timeline-post-item">
-              洛谷P1572 Java解法
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    
-      <div class="archive-timeline-tag"><span>2022</span></div>
-      
-    
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2022-12-01</div>
-          <div class="archive-timeline-post-content">
-            <a 
-              href="/2022/12/01/algorithm-00-01/"
-              class="archive-timeline-post-item">
-              新手班-01笔记
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2022-11-14</div>
-          <div class="archive-timeline-post-content">
-            <a 
-              href="/2022/11/14/hello-world/"
-              class="archive-timeline-post-item">
-              Hello World
-            </a>
-          </div>
-        </div>
-      </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
+      </a>
     </div>
   
 </div>
 
+<div 
+  class="card card-content toc-card" 
+  id="mobiletoc">
+  <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+
+</div>
             </main>
             <aside class="right-column">
               <div class="sticky-widescreen">
   
+  
+    <article class="card card-content toc-card">
+      <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+
+    </article>
   
   
   <article class="card card-content">
@@ -634,69 +640,6 @@
 </div>
   </article>
   
-  
-    <article class="card card-content">
-      <div class="archive-card">
-  <div class="archive-card-header">
-    <i 
-      class="iconfont icon-wodebaobiao" 
-      style="padding-right: 2px;">
-    </i>归档
-  </div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-          <a 
-            href="/archives/2023" 
-            class="archive-card-list-item">
-            2023
-            <span class="archive-card-list-item-badge">5</span>
-          </a>
-        
-        
-        
-      
-    
-      
-        
-      
-    
-    
-      <a 
-        href="/archives/2022" 
-        class="archive-card-list-item">
-        2022
-        <span class="archive-card-list-item-badge">2</span>
-      </a>
-    
-  </div>
-</div>
-    </article>
   
 </div>
             </aside>
@@ -799,6 +742,36 @@
 </a> 
      
      
+     
+      <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img')
+    var i
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a')
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
+      wrapper.setAttribute('aria-label', 'illustration')
+      wrapper.style.cssText =
+        'width: 100%; display: flex; justify-content: center;'
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt
+      wrapper.dataset.nolink = true
+      img[i].before(wrapper)
+      wrapper.append(img[i])
+      var divWrap = document.createElement('div')
+      divWrap.classList.add('gallery')
+      wrapper.before(divWrap)
+      divWrap.append(wrapper)
+    }
+    baguetteBox.run('.gallery')
+  }
+</script>
+<script>
+  loadScript(
+    "/js/lib/lightbox/baguetteBox.min.js",
+    addImgLayout
+  )
+</script>
+ 
      
      
     <script src="/js/main.js"></script> 
