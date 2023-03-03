@@ -18,17 +18,17 @@
   <link 
     rel="icon" 
     href="https://ricky1140.github.io/blog-img/ricky.png">
-  <title>洛谷P1097 Java解法</title>
+  <title>洛谷P1572 Java解法</title>
   
     
       <meta 
         property="og:title" 
-        content="洛谷P1097 Java解法">
+        content="洛谷P1572 Java解法">
     
     
       <meta 
         property="og:url" 
-        content="https://ricky1140.github.io/2023/01/31/luogu-P1097/index.html">
+        content="https://ricky1140.github.io/2023/01/30/luogu-P1572/index.html">
     
     
       <meta 
@@ -46,10 +46,10 @@
         content="article">
       <meta 
         property="og:article:published_time" 
-        content="2023-01-31">
+        content="2023-01-30">
       <meta 
         property="og:article:modified_time" 
-        content="2023-01-31">
+        content="2023-03-03">
       <meta 
         property="og:article:author" 
         content="Ricky">
@@ -57,15 +57,11 @@
         
           <meta 
             property="og:article:tag" 
-            content="map">
+            content="最大公因数">
         
           <meta 
             property="og:article:tag" 
-            content="set">
-        
-          <meta 
-            property="og:article:tag" 
-            content="TreeMap">
+            content="最小公倍数">
         
       
     
@@ -352,7 +348,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Map"><span class="toc-text">Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TreeMap"><span class="toc-text">TreeMap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set"><span class="toc-text">Set</span></a></li></ol>
+
       </div>
     </article>
   
@@ -498,16 +494,16 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      洛谷P1097 Java解法
+      洛谷P1572 Java解法
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2023-01-31T15:21:40.000Z">
+    <time datetime="2023-01-29T16:02:45.000Z">
       <i 
         class="iconfont icon-calendar" 
         style="margin-right: 2px;">
       </i>
-      <span>2023-01-31</span>
+      <span>2023-01-30</span>
     </time>
     
       <span class="dot"></span>
@@ -527,7 +523,7 @@
     
     
       <span class="dot"></span>
-      <span>591 字</span>
+      <span>1.1k 字</span>
     
   </div>
   
@@ -542,27 +538,18 @@
         
           
           <a 
-            href="/tags/map/" 
+            href="/tags/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%9B%A0%E6%95%B0/" 
             class="post-meta-link">
-            map
+            最大公因数
           </a>
         
           
             <span class="dot"></span>
           
           <a 
-            href="/tags/set/" 
+            href="/tags/%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0/" 
             class="post-meta-link">
-            set
-          </a>
-        
-          
-            <span class="dot"></span>
-          
-          <a 
-            href="/tags/TreeMap/" 
-            class="post-meta-link">
-            TreeMap
+            最小公倍数
           </a>
         
       </div>
@@ -572,40 +559,50 @@
   <div 
     id="section" 
     class="post-content">
-    <p>[P1097 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1097">NOIP2007 提高组] 统计数字 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+    <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1572">P1572 计算分数 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<p>以上是题目链接。</p>
 <hr>
-<p>这个题就纯粹记一下不熟悉的 <code>Map</code> 和 <code>Set</code> 相关。</p>
-<p>看题目可以知道：<strong>结果集为不重复的自然数 + 出现次数</strong></p>
-<p>那么我们这里就可以使用 <code>Map</code> 来存储自然数和次数，用 <code>Set</code> 来辅助读取数据。</p>
+<p>这个题吧，让我很生气。</p>
+<p>其实思路很简单，就是中间我想整点花活没整出来导致做了三个点（恼）</p>
+<p>当时还去看了一下题解想参考参考然后都是cpp的（悲）</p>
+<p>最后输入那里整不出其他活就只能用古老的循环替换哩</p>
+<p>那么接下来是题解</p>
 <hr>
+<p>这个题目的要求是计算分数的加减运算，并且要化最简。</p>
+<p>那么我们可以很容易想到：</p>
 <blockquote>
-<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><ul>
-<li>接口，不能直接实例化对象，如果要实例化对象只能实例化其实现类TreeMap或者HashMap</li>
-<li>存放键值对的Key是唯一的，value是可以重复的</li>
-<li>Key可以全部分离出来，存储到Set中来进行访问(因为Key不能重复)</li>
-<li>value可以全部分离出来，存储在Collection的任何一个子集合中(value可能有重复)</li>
-<li>键值对的Key不能直接修改，value可以修改，如果要修改key，只能先将该key删除掉，然后再来进行重新插入</li>
-</ul>
-<h3 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h3><ul>
-<li>无序，不允许重复（无序指元素顺序与添加顺序不一致）</li>
-<li>TreeMap 集合默认会对键进行排序，所以键必须实现自然排序和定制排序中的一种</li>
-<li>底层使用的数据结构是二叉树（红黑树）</li>
-</ul>
-<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><ul>
-<li>是继承自Collection的一个接口类</li>
-<li>只存储了key，并且要求key一定要唯一</li>
-<li>底层是使用Map来实现的，其使用key与Object的一个默认对象作为键值对插入到Map中的</li>
-<li>最大的功能就是对集合中的元素进行去重</li>
-<li>实现Set接口的常用类有TreeSet和HashSet，还有一个LinkedHashSet，LinkedHashSet是在HashSet的基础维护了一个双向链表来记录元素的插入次序</li>
-<li>Key不能修改，如果要修改，先将原来的删除掉，然后再重新插入</li>
-<li>不能插入null的key</li>
-</ul>
+<p>通分时求最小公倍数，化简时求最大公因数</p>
 </blockquote>
-<hr>
-<p>知道了以上特性其实这道题就简单起来了</p>
-<p>以下为完整代码：</p>
-<pre class="highlight"><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.TreeMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">P1097</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">		</span><br><span class="line">		<span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">		</span><br><span class="line">		Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">TreeMap</span>&lt;&gt;();</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">			<span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">if</span> (map.containsKey(m)) &#123;</span><br><span class="line">				map.put(m, map.get(m) + <span class="number">1</span>);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				map.put(m, <span class="number">1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		Set&lt;Integer&gt; set = map.keySet();</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> s:set) &#123;</span><br><span class="line">			System.out.println(s + <span class="string">&quot; &quot;</span> + map.get(s));</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		sc.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre>
+<p>于是就有了以下代码：</p>
+<pre class="highlight"><span class="line"><span class="comment">// 最大公因数</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> m;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> gcd(n, m % n);</span><br><span class="line">&#125;</span><br></pre>
 
+<p>然后还有一个公式：</p>
+<blockquote>
+<p>最小公倍数 &#x3D; 两整数乘积 &#x2F; 最大公因数</p>
+</blockquote>
+<pre class="highlight"><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">lcm</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> m * n / gcd(m, n);</span><br><span class="line">&#125;</span><br></pre>
+
+<p>接收数字的时候稍微麻烦一点，c语言和cpp可以用 <code>scanf(&quot;%d/%d&quot;, &amp;a, &amp;b)</code> 来解决，甚至少了判断符号这一步，但是我们在用 java（悲）</p>
+<p>所以这里还是用 <code>sc.nextLine()</code> 接收一整个字符串。</p>
+<p>在这里，我用了个 <code>List&lt;Character&gt;</code> 存储符号，本来也想用类似的方法存储数字但有些数字在两位以上，就会被分开导致计算错误。</p>
+<p>去搜了一下 <code>Scanner</code> 有没有其他用法的时候看见了这样的用法：</p>
+<pre class="highlight"><span class="line"><span class="type">String</span> <span class="variable">input</span> <span class="operator">=</span> <span class="string">&quot;1 fish 2 fish red fish blue fish&quot;</span>;</span><br><span class="line"><span class="type">Scanner</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(input).useDelimiter(<span class="string">&quot;\\s*fish\\s*&quot;</span>);</span><br><span class="line">System.out.println(s.nextInt());</span><br><span class="line">System.out.println(s.nextInt());</span><br><span class="line">System.out.println(s.next());</span><br><span class="line">System.out.println(s.next());</span><br><span class="line">s.close();</span><br></pre>
+
+<p>输出结果为：</p>
+<pre class="highlight"><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line">red</span><br><span class="line">blue</span><br></pre>
+
+<p>这里是用 <code>Scanner</code> 设置特定的分隔符，这样就能分开 &#x2F; 前后的数字了，a是存储分子的 List，b存储分母</p>
+<pre class="highlight"><span class="line"><span class="type">Scanner</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(sb.toString()).useDelimiter(<span class="string">&quot;\\s*/\\s*&quot;</span>);</span><br><span class="line">		</span><br><span class="line"><span class="keyword">while</span> (s.hasNextInt()) &#123;</span><br><span class="line">	a.add(s.nextInt());</span><br><span class="line">	b.add(s.nextInt());</span><br><span class="line">&#125;</span><br></pre>
+
+<p>这里就分好分子和分母了，接下来求分母的最小公倍数，通分后计算分子，然后得出的结果再求分子和分母的最大公因数。分子分母同除最大公因数。这里因为结果输出是横向的，所以要判断一下分母是否为负，如果为负则分子分母同时变号。</p>
+<p>输出的时候直接输出分子，如果分子不能整除分母的话再输出 &#x2F; 和分母。</p>
+<p>以上就是整道题的思路。</p>
+<hr>
+<p>以下是完整源代码：</p>
+<pre class="highlight"><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">P1572</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">		</span><br><span class="line">		<span class="type">StringBuffer</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuffer</span>();</span><br><span class="line">		</span><br><span class="line">		List&lt;Integer&gt; a = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">		List&lt;Integer&gt; b = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">		List&lt;Character&gt; c = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">		</span><br><span class="line">		<span class="type">int</span> <span class="variable">lcm</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">		<span class="type">int</span> <span class="variable">gcd</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 用字符串接收，将分子和分母分别存</span></span><br><span class="line">		<span class="type">String</span> <span class="variable">in</span> <span class="operator">=</span> sc.nextLine();</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (in.charAt(<span class="number">0</span>) != <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">			c.add(<span class="string">&#x27;+&#x27;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; in.length(); i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (in.charAt(i) == <span class="string">&#x27;-&#x27;</span> || in.charAt(i) == <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">				c.add(in.charAt(i));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (Character ch : in.toCharArray()) &#123;</span><br><span class="line">			<span class="keyword">if</span> (ch == <span class="string">&#x27;+&#x27;</span> || ch == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">				sb.append(<span class="string">&#x27;/&#x27;</span>);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				sb.append(ch);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line"><span class="comment">//		System.out.println(sb.toString());</span></span><br><span class="line">		</span><br><span class="line">		<span class="type">Scanner</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(sb.toString()).useDelimiter(<span class="string">&quot;\\s*/\\s*&quot;</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> (s.hasNextInt()) &#123;</span><br><span class="line">			a.add(s.nextInt());</span><br><span class="line">			b.add(s.nextInt());</span><br><span class="line">		&#125;</span><br><span class="line"><span class="comment">//		</span></span><br><span class="line"><span class="comment">//		System.out.println();</span></span><br><span class="line"><span class="comment">//		System.out.println(a.toString());</span></span><br><span class="line"><span class="comment">//		System.out.println();</span></span><br><span class="line"><span class="comment">//		System.out.println(b.toString());</span></span><br><span class="line"><span class="comment">//		System.out.println();</span></span><br><span class="line"><span class="comment">//		System.out.println(c.toString());</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; b.size(); i++) &#123;</span><br><span class="line">			lcm = lcm(lcm, b.get(i));</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; a.size(); i++) &#123;</span><br><span class="line">			a.set(i, a.get(i) * (lcm / b.get(i)));</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="type">int</span> <span class="variable">ansa</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span> <span class="variable">ansb</span> <span class="operator">=</span> lcm;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; c.size(); i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (c.get(i) == <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">				ansa += a.get(i);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				ansa -= a.get(i);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		gcd = gcd(ansa, ansb);</span><br><span class="line">		</span><br><span class="line">		ansa /= gcd;</span><br><span class="line">		ansb /= gcd;</span><br><span class="line"><span class="comment">//		</span></span><br><span class="line"><span class="comment">//		System.out.println(ansa);</span></span><br><span class="line"><span class="comment">//		System.out.println(ansb);</span></span><br><span class="line"><span class="comment">//		System.out.println(gcd);</span></span><br><span class="line"><span class="comment">//		System.out.println(lcm);</span></span><br><span class="line"><span class="comment">//		</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (ansb &lt; <span class="number">0</span>) &#123;</span><br><span class="line">			ansa = -ansa;</span><br><span class="line">			ansb = -ansb;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		System.out.print(ansa);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (ansa % ansb != <span class="number">0</span>) &#123;</span><br><span class="line">			System.out.print(<span class="string">&quot;/&quot;</span> + ansb);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		sc.close();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 最小公倍数 = 两整数乘积 / 最大公因数</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">lcm</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> m * n / gcd(m, n);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 最大公因数</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> m;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">return</span> gcd(n, m % n);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<hr>
+<p>哈啊——可真是松懈过头哩，这都能做这么久。</p>
 
   </div>
   <div>
@@ -625,8 +622,8 @@
           <span style="font-weight: bold;">文章链接：</span><a 
             target="_blank" 
             rel="nofollow noopener noreferrer" 
-            href="https://ricky1140.github.io/2023/01/31/luogu-P1097/">
-            https://ricky1140.github.io/2023/01/31/luogu-P1097/
+            href="https://ricky1140.github.io/2023/01/30/luogu-P1572/">
+            https://ricky1140.github.io/2023/01/30/luogu-P1572/
           </a>
         </p>
         <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
@@ -638,13 +635,13 @@
   
     <div class="nav-item-prev">
       <a 
-        href="/2023/01/31/luogu-P1115/" 
+        href="/2023/01/31/luogu-P1097/" 
         class="nav-link">
         <i class="iconfont icon-left nav-prev-icon"></i>
         <div>
           <div class="nav-label">上一篇</div>
           
-            <div class="nav-title">洛谷P1115 Java解法 </div>
+            <div class="nav-title">洛谷P1097 Java解法 </div>
           
         </div>
       </a>
@@ -653,12 +650,12 @@
   
     <div class="nav-item-next">
       <a 
-        href="/2023/01/30/luogu-P1572/" 
+        href="/2022/12/01/algorithm-00-01/" 
         class="nav-link">
         <div>
           <div class="nav-label">下一篇</div>
           
-            <div class="nav-title">洛谷P1572 Java解法 </div>
+            <div class="nav-title">新手班-01笔记 </div>
           
         </div>
         <i class="iconfont icon-right nav-next-icon"></i>
@@ -676,7 +673,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Map"><span class="toc-text">Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TreeMap"><span class="toc-text">TreeMap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set"><span class="toc-text">Set</span></a></li></ol>
+
 </div>
             </main>
             <aside class="right-column">
@@ -690,7 +687,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Map"><span class="toc-text">Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TreeMap"><span class="toc-text">TreeMap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set"><span class="toc-text">Set</span></a></li></ol>
+
     </article>
   
   
