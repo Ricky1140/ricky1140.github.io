@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta 
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta 
+    http-equiv="X-UA-Compatible" 
+    content="ie=edge">
+  <meta 
+    name="theme-color" 
+    content="#fff" 
+    id="theme-color">
+  <meta 
+    name="description" 
+    content="博客">
+  <link 
+    rel="icon" 
+    href="https://ricky1140.github.io/blog-img/ricky.png">
+  <title>新手班-02笔记</title>
+  
+    
+      <meta 
+        property="og:title" 
+        content="新手班-02笔记">
+    
+    
+      <meta 
+        property="og:url" 
+        content="https://ricky1140.github.io/2023/03/21/algorithm-00-02/index.html">
+    
+    
+      <meta 
+        property="og:img" 
+        content="https://ricky1140.github.io/blog-img/ricky.png">
+    
+    
+      <meta 
+        property="og:img" 
+        content="博客">
+    
+    
+      <meta 
+        property="og:type" 
+        content="article">
+      <meta 
+        property="og:article:published_time" 
+        content="2023-03-21">
+      <meta 
+        property="og:article:modified_time" 
+        content="2023-03-28">
+      <meta 
+        property="og:article:author" 
+        content="Ricky">
+      
+        
+          <meta 
+            property="og:article:tag" 
+            content="算法">
+        
+      
+    
+  
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  <link rel="preload" href="/css/main.css" as="style" >
+  
+  <link rel="modulepreload" href="//instant.page/5.1.0">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+  
+  
+  
+    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+  
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    function loadCSS(href, data, attr) {
+      var sheet = document.createElement('link');
+      sheet.ref = 'stylesheet';
+      sheet.href = href;
+      sheet.dataset[data] = attr;
+      document.head.appendChild(sheet);
+    }
+    function changeCSS(cssFile, data, attr) {
+      var oldlink = document.querySelector(data);
+      var newlink = document.createElement("link");
+      newlink.setAttribute("rel", "stylesheet");
+      newlink.setAttribute("href", cssFile);
+      newlink.dataset.prism = attr;
+      document.head.replaceChild(newlink, oldlink);
+    }
+  </script>
+  
+    
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+  </script>
+  
+    <script>
+      var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+        document.getElementById('theme-color').dataset.mode = getCssMediaQuery();
+      }
+    };
+    setDarkmode();
+    </script>
+  
+  
+  
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <div class="wrapper">
+       
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <a class="navbar-logo-main" href="/">
+      
+        <img 
+          class="navbar-logo-img"
+          width="32"
+          height="32"
+          src="https://ricky1140.github.io/blog-img/ricky.png" 
+          alt="blog logo">
+      
+      <span class="navbar-logo-dsc">Ricky's Blog</span>
+      </a>
+  </div>
+  <div class="navbar-menu">
+    
+      <a 
+        href="/" 
+        class="navbar-menu-item">
+        
+          首页
+        
+      </a>
+    
+      <a 
+        href="/archives" 
+        class="navbar-menu-item">
+        
+          归档
+        
+      </a>
+    
+      <a 
+        href="/tags" 
+        class="navbar-menu-item">
+        
+          标签
+        
+      </a>
+    
+      <a 
+        href="/categories" 
+        class="navbar-menu-item">
+        
+          分类
+        
+      </a>
+    
+      <a 
+        href="/about" 
+        class="navbar-menu-item">
+        
+          关于
+        
+      </a>
+    
+      <a 
+        href="/links" 
+        class="navbar-menu-item">
+        
+          友链
+        
+      </a>
+    
+      <a 
+        href="/punch" 
+        class="navbar-menu-item">
+        
+          打卡
+        
+      </a>
+    
+    <button 
+      class="navbar-menu-item darknavbar navbar-menu-btn" 
+      aria-label="Toggle dark mode"
+      id="dark">
+      <i class="iconfont icon-weather"></i>
+    </button>
+    <button 
+      class="navbar-menu-item searchnavbar navbar-menu-btn" 
+      aria-label="Toggle search"
+      id="search">
+      <!-- <i 
+        class="iconfont icon-search" 
+        style="font-size: 1.2rem; font-weight: 400;">
+      </i> -->
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+        class="iconify iconify--ion" width="28" height="28" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512">
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M256 80a176 176 0 1 0 176 176A176 176 0 0 0 256 80Z"></path>
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M232 160a72 72 0 1 0 72 72a72 72 0 0 0-72-72Z"></path>
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="28"
+          d="M283.64 283.64L336 336"></path>
+      </svg>
+    </button>
+  </div>
+</nav> 
+      
+      <div 
+        id="local-search" 
+        style="display: none">
+        <input
+          class="navbar-menu-item"
+          id="search-input"
+          placeholder="请输入搜索内容..." />
+        <div id="search-content"></div>
+      </div>
+      
+      <div class="section-wrap">
+        <div class="container">
+          <div class="columns">
+            <aside class="left-column">
+              
+              <div class="card card-author">
+                
+  <img 
+    src="https://ricky1140.github.io/blog-img/ricky.png" 
+    class="author-img"
+    width="88"
+    height="88"
+    alt="author avatar">
+
+<p class="author-name">Ricky</p>
+<p class="author-description">摸鱼ing</p>
+<div class="author-message">
+  <a 
+    class="author-posts-count" 
+    href="/archives">
+    <span>9</span>
+    <span>文章</span>
+  </a>
+  <a 
+    class="author-categories-count" 
+    href="/categories">
+    <span>4</span>
+    <span>分类</span>
+  </a>
+  <a 
+    class="author-tags-count" 
+    href="/tags">
+    <span>14</span>
+    <span>标签</span>
+  </a>
+</div>
+
+  <div class="author-card-society">
+    
+      <div class="author-card-society-icon">
+        <a target="_blank" rel="noopener" href="https://github.com/Ricky1140">
+          <i class="iconfont icon-github society-icon"></i>
+        </a>
+      </div>
+    
+  </div>
+
+              </div>
+               <div class="sticky-tablet">
+  
+  
+    <article class="display-when-two-columns spacer">
+      <div class="card card-content toc-card">
+        <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E2%99%A0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">♠数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">基本数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8"><span class="toc-text">链表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E2%99%A3%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-text">♣前缀和</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%A5%A0%E5%AF%B9%E6%95%B0%E5%99%A8"><span class="toc-text">🥠对数器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="toc-text">随机数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-text">面试题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AA%E7%AD%89%E6%A6%82%E7%8E%87%E8%BF%94%E5%9B%9E-1-5-%E7%9A%84%E5%87%BD%E6%95%B0-f-%EF%BC%8C%E6%B1%82%E7%AD%89%E6%A6%82%E7%8E%87%E8%BF%94%E5%9B%9E-1-7-%E7%9A%84%E5%87%BD%E6%95%B0-g"><span class="toc-text">提供一个等概率返回 1 ~ 5 的函数 f()，求等概率返回 1 ~ 7 的函数 g()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AA%E5%9B%BA%E5%AE%9A%E6%A6%82%E7%8E%87%E8%BF%94%E5%9B%9E-1-%E5%92%8C-0-%E7%9A%84%E5%87%BD%E6%95%B0-f-%EF%BC%8C%E6%B1%82%E7%AD%89%E6%A6%82%E7%8E%87%E8%BF%94%E5%9B%9E-1-%E5%92%8C-0-%E7%9A%84%E5%87%BD%E6%95%B0-g"><span class="toc-text">提供一个固定概率返回 1 和 0 的函数 f()，求等概率返回 1 和 0 的函数 g()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E6%95%B0%E5%99%A8"><span class="toc-text">对数器</span></a></li></ol></li></ol>
+      </div>
+    </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header">
+    <i 
+      class="iconfont icon-fenlei" 
+      style="padding-right: 2px;">
+    </i>分类
+  </div>
+  <div class="categories-list">
+    
+      <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+        <div class="categories-list-item">
+          数据结构与算法
+          <span class="categories-list-item-badge">8</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/">
+        <div class="categories-list-item">
+          数据结构与算法/算法导论
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%B4%9B%E8%B0%B7/">
+        <div class="categories-list-item">
+          数据结构与算法/洛谷
+          <span class="categories-list-item-badge">5</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%96%B0%E6%89%8B%E7%8F%AD/">
+        <div class="categories-list-item">
+          数据结构与算法/新手班
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header">
+    <i 
+      class="iconfont icon-biaoqian" 
+      style="padding-right: 2px;">
+    </i>热门标签
+  </div>
+  <div class="tags-list">
+    
+      <a 
+        href="/tags/%E7%AE%97%E6%B3%95/" 
+        title="算法">
+        <div class="tags-list-item">算法</div>
+      </a>
+    
+      <a 
+        href="/tags/%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0/" 
+        title="最小公倍数">
+        <div class="tags-list-item">最小公倍数</div>
+      </a>
+    
+      <a 
+        href="/tags/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%9B%A0%E6%95%B0/" 
+        title="最大公因数">
+        <div class="tags-list-item">最大公因数</div>
+      </a>
+    
+      <a 
+        href="/tags/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/" 
+        title="二维数组">
+        <div class="tags-list-item">二维数组</div>
+      </a>
+    
+      <a 
+        href="/tags/%E6%9E%9A%E4%B8%BE/" 
+        title="枚举">
+        <div class="tags-list-item">枚举</div>
+      </a>
+    
+      <a 
+        href="/tags/dp/" 
+        title="dp">
+        <div class="tags-list-item">dp</div>
+      </a>
+    
+      <a 
+        href="/tags/TreeMap/" 
+        title="TreeMap">
+        <div class="tags-list-item">TreeMap</div>
+      </a>
+    
+      <a 
+        href="/tags/set/" 
+        title="set">
+        <div class="tags-list-item">set</div>
+      </a>
+    
+      <a 
+        href="/tags/map/" 
+        title="map">
+        <div class="tags-list-item">map</div>
+      </a>
+    
+      <a 
+        href="/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" 
+        title="插入排序">
+        <div class="tags-list-item">插入排序</div>
+      </a>
+    
+      <a 
+        href="/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" 
+        title="冒泡排序">
+        <div class="tags-list-item">冒泡排序</div>
+      </a>
+    
+      <a 
+        href="/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" 
+        title="选择排序">
+        <div class="tags-list-item">选择排序</div>
+      </a>
+    
+      <a 
+        href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" 
+        title="位运算">
+        <div class="tags-list-item">位运算</div>
+      </a>
+    
+      <a 
+        href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6/" 
+        title="二进制">
+        <div class="tags-list-item">二进制</div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+            <main class="main-column">
+              
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      新手班-02笔记
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2023-03-21T13:48:21.000Z">
+      <i 
+        class="iconfont icon-calendar" 
+        style="margin-right: 2px;">
+      </i>
+      <span>2023-03-21</span>
+    </time>
+    
+      <span class="dot"></span>
+      
+        <a 
+          href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" 
+          class="post-meta-link">
+          数据结构与算法
+        </a>
+      
+        <a 
+          href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%96%B0%E6%89%8B%E7%8F%AD/" 
+          class="post-meta-link">
+          新手班
+        </a>
+      
+    
+    
+      <span class="dot"></span>
+      <span>815 字</span>
+    
+  </div>
+  
+    <div 
+      class="post-meta post-show-meta" 
+      style="margin-top: -10px;">
+      <div style="display: flex; align-items: center;">
+        <i 
+          class="iconfont icon-biaoqian" 
+          style="margin-right: 2px; font-size: 1.15rem;">
+        </i>
+        
+          
+          <a 
+            href="/tags/%E7%AE%97%E6%B3%95/" 
+            class="post-meta-link">
+            算法
+          </a>
+        
+      </div>
+    </div>
+  
+  </header>
+  <div 
+    id="section" 
+    class="post-content">
+    <h1 id="♠数据结构"><a href="#♠数据结构" class="headerlink" title="♠数据结构"></a>♠数据结构</h1><ul>
+<li>由连续结构和跳转结构组成</li>
+</ul>
+<h2 id="基本数据结构"><a href="#基本数据结构" class="headerlink" title="基本数据结构"></a>基本数据结构</h2><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><ul>
+<li>连续结构</li>
+<li>便于寻址，不便于增删</li>
+</ul>
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><ul>
+<li>跳转结构</li>
+<li>便于增删，不便于寻址</li>
+</ul>
+<h1 id="♣前缀和"><a href="#♣前缀和" class="headerlink" title="♣前缀和"></a>♣前缀和</h1><blockquote>
+<p>比如这里有一个数组 arr，长度为 n</p>
+<p>定义一个数组 h，长度也为 n，h满足：</p>
+<p>​		h[i] &#x3D; arr[0] + arr[1] + … + arr[i]</p>
+<p>即 h[i] 为 arr 的前 i 项的和</p>
+<p>当需要求 arr 下标为的 L 到 R 之间的和 sum 时就可以用：</p>
+<p>​		1°	L &#x3D; 0</p>
+<p>​				sum &#x3D; h[R]</p>
+<p>​		2°	L !&#x3D; 0</p>
+<p>​				sum &#x3D; h[R] - h[L - 1]</p>
+</blockquote>
+<ul>
+<li>通常更好</li>
+<li>注：如果查询请求极其频繁，矩阵比前缀和更好（前者直接返回值，后者需要相减）</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Code01_PreSum</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">RangeSum1</span> &#123;</span><br><span class="line">		<span class="keyword">private</span> <span class="type">int</span>[] arr;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">public</span> <span class="title function_">RangeSum1</span><span class="params">(<span class="type">int</span>[] array)</span> &#123;</span><br><span class="line">			arr = array;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">public</span> <span class="type">int</span> <span class="title function_">rangeSum</span><span class="params">(<span class="type">int</span> L, <span class="type">int</span> R)</span> &#123;</span><br><span class="line">			<span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> L; i &lt;= R; i++) &#123;</span><br><span class="line">				sum += arr[i];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> sum;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">RangeSum2</span> &#123;</span><br><span class="line">		<span class="keyword">private</span> <span class="type">int</span>[] preSum;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">public</span> <span class="title function_">RangeSum2</span><span class="params">(<span class="type">int</span>[] array)</span> &#123;</span><br><span class="line">			<span class="type">int</span> <span class="variable">N</span> <span class="operator">=</span> array.length;</span><br><span class="line">			preSum = <span class="keyword">new</span> <span class="title class_">int</span>[N];</span><br><span class="line">			preSum[<span class="number">0</span>] = array[<span class="number">0</span>];</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; N; i++) &#123;</span><br><span class="line">				preSum[i] = preSum[i - <span class="number">1</span>] + array[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">public</span> <span class="type">int</span> <span class="title function_">rangeSum</span><span class="params">(<span class="type">int</span> L, <span class="type">int</span> R)</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> L == <span class="number">0</span> ? preSum[R] : preSum[R] - preSum[L - <span class="number">1</span>];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<p>可以简单加个 main 函数来玩前缀和：</p>
+<pre class="highlight"><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">	<span class="type">int</span>[] arr = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line">	</span><br><span class="line">	<span class="type">RangeSum2</span> <span class="variable">rs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RangeSum2</span>(arr);</span><br><span class="line">	</span><br><span class="line">	System.out.println(rs.rangeSum(<span class="number">4</span>, <span class="number">7</span>));</span><br><span class="line">&#125;</span><br></pre>
+
+
+
+
+
+<h1 id="🥠对数器"><a href="#🥠对数器" class="headerlink" title="🥠对数器"></a>🥠对数器</h1><h2 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h2><p>随机：[0,1)</p>
+<pre class="highlight"><span class="line"><span class="type">double</span> <span class="variable">ans</span> <span class="operator">=</span> Math.random();</span><br></pre>
+
+<p>随机：[0,8)</p>
+<pre class="highlight"><span class="line"><span class="type">double</span> <span class="variable">ans</span> <span class="operator">=</span> Math.random() * <span class="number">8</span>;</span><br></pre>
+
+<p>随机：[0,k) -&gt; [0,k-1]</p>
+<pre class="highlight"><span class="line"><span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">9</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> (<span class="type">int</span>)(Math.random() * k);</span><br></pre>
+
+<p>返回 [0,1) 的一个小数</p>
+<p>任意的 x，x 属于[0,1)，[0,x) 范围上的数出现概率为 x 平方</p>
+<blockquote>
+<p>调用 xToXPower2() 函数时，调用了两次 random，只有当两次 random 都小于 x 才会有效，所以是 x 平方</p>
+</blockquote>
+<pre class="highlight"><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">testTimes</span> <span class="operator">=</span> <span class="number">1000000</span>;</span><br><span class="line">		<span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; testTimes; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (xToXPower2() &lt; x) &#123;</span><br><span class="line">				count++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println((<span class="type">double</span>) count / (<span class="type">double</span>) testTimes);</span><br><span class="line">		System.out.println(Math.pow(x, <span class="number">2</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">double</span> <span class="title function_">xToXPower2</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> Math.max(Math.random(), Math.random());</span><br><span class="line">	&#125;</span><br></pre>
+
+<h3 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h3><h4 id="提供一个等概率返回-1-5-的函数-f-，求等概率返回-1-7-的函数-g"><a href="#提供一个等概率返回-1-5-的函数-f-，求等概率返回-1-7-的函数-g" class="headerlink" title="提供一个等概率返回 1 ~ 5 的函数 f()，求等概率返回 1 ~ 7 的函数 g()"></a>提供一个等概率返回 1 ~ 5 的函数 f()，求等概率返回 1 ~ 7 的函数 g()</h4><blockquote>
+<p>常见误区：</p>
+<ul>
+<li>不能直接 f() + 2，结果没有 1 和 2</li>
+<li>有 f2() 后不能直接乘以 6，结果只有 0 和 6</li>
+</ul>
+</blockquote>
+<pre class="highlight"><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">f</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> (<span class="type">int</span>)(Math.random() * <span class="number">5</span>) + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">// 只能用f1，等概率返回0，1</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">f2</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		ans = f();</span><br><span class="line">	&#125; <span class="keyword">while</span>(ans == <span class="number">3</span>);</span><br><span class="line">	<span class="keyword">return</span> ans &lt; <span class="number">3</span> ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">// 得到 000 ~ 111 等概率，实现 0 ~ 7</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">f3</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> (f2() &lt;&lt; <span class="number">2</span>) + (f2() &lt;&lt; <span class="number">1</span>) + (f2() &lt;&lt; <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">// 实现 0 ~ 6</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">f4</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		ans = f3();</span><br><span class="line">	&#125; <span class="keyword">while</span>(ans == <span class="number">7</span>);</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">g</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> f4() + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre>
+
+<h4 id="提供一个固定概率返回-1-和-0-的函数-f-，求等概率返回-1-和-0-的函数-g"><a href="#提供一个固定概率返回-1-和-0-的函数-f-，求等概率返回-1-和-0-的函数-g" class="headerlink" title="提供一个固定概率返回 1 和 0 的函数 f()，求等概率返回 1 和 0 的函数 g()"></a>提供一个固定概率返回 1 和 0 的函数 f()，求等概率返回 1 和 0 的函数 g()</h4><blockquote>
+<p>思路：</p>
+<ul>
+<li>循环到 1 1 或 0 0 时不要，继续循环</li>
+<li>循环到 1 0 和 0 1 时返回</li>
+</ul>
+</blockquote>
+<pre class="highlight"><span class="line"><span class="comment">// 固定概率返回0和1</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">x</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> Math.random() &lt; <span class="number">0.84</span> ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">// 等概率返回0和1</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">y</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		ans = x();</span><br><span class="line">	&#125; <span class="keyword">while</span> (ans == x());</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre>
+
+<h2 id="对数器"><a href="#对数器" class="headerlink" title="对数器"></a>对数器</h2><ul>
+<li>自己生成随机数据进行代码测试</li>
+<li>数组长度、数组内容都可以随机出来作为测试数据</li>
+</ul>
+
+  </div>
+  <div>
+    
+      <div 
+        class="post-note note-warning copyright" 
+        style="margin-top: 42px">
+        <p>
+          <span style="font-weight: bold;">作者：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="/about">
+            Ricky
+          </a>
+        </p>
+        <p>
+          <span style="font-weight: bold;">文章链接：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="https://ricky1140.github.io/2023/03/21/algorithm-00-02/">
+            https://ricky1140.github.io/2023/03/21/algorithm-00-02/
+          </a>
+        </p>
+        <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+      </div>
+    
+  </div>
+</article>
+<div class="nav">
+  
+    <div class="nav-item-prev">
+      <a 
+        href="/2023/03/27/Introduction2Algorithms-homework/" 
+        class="nav-link">
+        <i class="iconfont icon-left nav-prev-icon"></i>
+        <div>
+          <div class="nav-label">上一篇</div>
+          
+            <div class="nav-title">算法导论 课后题 </div>
+          
+        </div>
+      </a>
+    </div>
+  
+  
+    <div class="nav-item-next">
+      <a 
+        href="/2023/02/01/luogu-P1205/" 
+        class="nav-link">
+        <div>
+          <div class="nav-label">下一篇</div>
+          
+            <div class="nav-title">洛谷P1205 Java解法 </div>
+          
+        </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
+      </a>
+    </div>
+  
+</div>
+
+<div 
+  class="card card-content toc-card" 
+  id="mobiletoc">
+  <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E2%99%A0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">♠数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">基本数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8"><span class="toc-text">链表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E2%99%A3%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-text">♣前缀和</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%A5%A0%E5%AF%B9%E6%95%B0%E5%99%A8"><span class="toc-text">🥠对数器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="toc-text">随机数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-text">面试题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AA%E7%AD%89%E6%A6%82%E7%8E%87%E8%BF%94%E5%9B%9E-1-5-%E7%9A%84%E5%87%BD%E6%95%B0-f-%EF%BC%8C%E6%B1%82%E7%AD%89%E6%A6%82%E7%8E%87%E8%BF%94%E5%9B%9E-1-7-%E7%9A%84%E5%87%BD%E6%95%B0-g"><span class="toc-text">提供一个等概率返回 1 ~ 5 的函数 f()，求等概率返回 1 ~ 7 的函数 g()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AA%E5%9B%BA%E5%AE%9A%E6%A6%82%E7%8E%87%E8%BF%94%E5%9B%9E-1-%E5%92%8C-0-%E7%9A%84%E5%87%BD%E6%95%B0-f-%EF%BC%8C%E6%B1%82%E7%AD%89%E6%A6%82%E7%8E%87%E8%BF%94%E5%9B%9E-1-%E5%92%8C-0-%E7%9A%84%E5%87%BD%E6%95%B0-g"><span class="toc-text">提供一个固定概率返回 1 和 0 的函数 f()，求等概率返回 1 和 0 的函数 g()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E6%95%B0%E5%99%A8"><span class="toc-text">对数器</span></a></li></ol></li></ol>
+</div>
+            </main>
+            <aside class="right-column">
+              <div class="sticky-widescreen">
+  
+  
+    <article class="card card-content toc-card">
+      <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E2%99%A0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">♠数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">基本数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8"><span class="toc-text">链表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E2%99%A3%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-text">♣前缀和</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%A5%A0%E5%AF%B9%E6%95%B0%E5%99%A8"><span class="toc-text">🥠对数器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="toc-text">随机数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-text">面试题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AA%E7%AD%89%E6%A6%82%E7%8E%87%E8%BF%94%E5%9B%9E-1-5-%E7%9A%84%E5%87%BD%E6%95%B0-f-%EF%BC%8C%E6%B1%82%E7%AD%89%E6%A6%82%E7%8E%87%E8%BF%94%E5%9B%9E-1-7-%E7%9A%84%E5%87%BD%E6%95%B0-g"><span class="toc-text">提供一个等概率返回 1 ~ 5 的函数 f()，求等概率返回 1 ~ 7 的函数 g()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AA%E5%9B%BA%E5%AE%9A%E6%A6%82%E7%8E%87%E8%BF%94%E5%9B%9E-1-%E5%92%8C-0-%E7%9A%84%E5%87%BD%E6%95%B0-f-%EF%BC%8C%E6%B1%82%E7%AD%89%E6%A6%82%E7%8E%87%E8%BF%94%E5%9B%9E-1-%E5%92%8C-0-%E7%9A%84%E5%87%BD%E6%95%B0-g"><span class="toc-text">提供一个固定概率返回 1 和 0 的函数 f()，求等概率返回 1 和 0 的函数 g()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E6%95%B0%E5%99%A8"><span class="toc-text">对数器</span></a></li></ol></li></ol>
+    </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header">
+    <i 
+      class="iconfont icon-wenzhang_huaban" 
+      style="padding-right: 2px;">
+    </i>最近文章
+  </div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-03-27</div>
+        <a href="/2023/03/27/Introduction2Algorithms-homework/"><div class="recent-posts-item-content">算法导论 课后题</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-03-21</div>
+        <a href="/2023/03/21/algorithm-00-02/"><div class="recent-posts-item-content">新手班-02笔记</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-02-01</div>
+        <a href="/2023/02/01/luogu-P1205/"><div class="recent-posts-item-content">洛谷P1205 Java解法</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-01-31</div>
+        <a href="/2023/01/31/luogu-P1202/"><div class="recent-posts-item-content">洛谷P1202 Java解法</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+    <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>
+          Copyright ©
+          
+            2020
+          
+          
+                - 
+                2023
+          
+        </span>
+        &nbsp;
+        <a 
+          href="/" 
+          class="footer-link">
+          Ricky's Blog
+        </a>
+      </div>
+    </div>
+
+    
+      <div class="footer-dsc">
+        
+          Powered by
+          <a 
+            href="https://hexo.io/" 
+            class="footer-link" 
+            target="_blank" 
+            rel="nofollow noopener noreferrer">
+            &nbsp;Hexo
+          </a>
+        
+        
+          <span>&nbsp;|&nbsp;</span>
+        
+        
+          Theme -
+          <a 
+            href="https://github.com/theme-kaze" 
+            class="footer-link" 
+            target="_blank"
+            rel="nofollow noopener noreferrer">
+            &nbsp;Kaze
+          </a>
+        
+      </div>
+    
+    
+    
+    
+</footer>
+ 
+    
+  <a 
+    role="button" 
+    id="scrollbutton" 
+    class="basebutton" 
+    aria-label="回到顶部">
+    <i class="iconfont icon-arrowleft button-icon"></i>
+  </a>
+
+<a 
+  role="button" 
+  id="menubutton"
+  aria-label="menu button"
+  class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="popbutton" 
+  class="basebutton" 
+  aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="darkbutton" 
+  class="basebutton darkwidget" 
+  aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="searchbutton" 
+  class="basebutton searchwidget" 
+  aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a> 
+     
+     
+     
+      <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img')
+    var i
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a')
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
+      wrapper.setAttribute('aria-label', 'illustration')
+      wrapper.style.cssText =
+        'width: 100%; display: flex; justify-content: center;'
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt
+      wrapper.dataset.nolink = true
+      img[i].before(wrapper)
+      wrapper.append(img[i])
+      var divWrap = document.createElement('div')
+      divWrap.classList.add('gallery')
+      wrapper.before(divWrap)
+      divWrap.append(wrapper)
+    }
+    baguetteBox.run('.gallery')
+  }
+</script>
+<script>
+  loadScript(
+    "/js/lib/lightbox/baguetteBox.min.js",
+    addImgLayout
+  )
+</script>
+ 
+     
+     
+    <script src="/js/main.js"></script> 
+     
+    
+      <script>
+        var addLazyload = function () {
+          var observer = lozad('.lozad', {
+            load: function (el) {
+              el.srcset = el.getAttribute('data-src')
+            },
+            loaded: function (el) {
+              el.classList.add('loaded')
+            },
+          })
+          observer.observe()
+        }
+      </script>
+      <script>
+        loadScript('/js/lib/lozad.min.js', addLazyload)
+      </script>
+    
+    <script src="//instant.page/5.1.0" type="module"
+      integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
+    
+    
+  </body>
+</html>

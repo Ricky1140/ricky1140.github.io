@@ -18,17 +18,17 @@
   <link 
     rel="icon" 
     href="https://ricky1140.github.io/blog-img/ricky.png">
-  <title>洛谷P1115 Java解法</title>
+  <title>算法导论 课后题</title>
   
     
       <meta 
         property="og:title" 
-        content="洛谷P1115 Java解法">
+        content="算法导论 课后题">
     
     
       <meta 
         property="og:url" 
-        content="https://ricky1140.github.io/2023/01/31/luogu-P1115/index.html">
+        content="https://ricky1140.github.io/2023/03/27/Introduction2Algorithms-homework/index.html">
     
     
       <meta 
@@ -46,18 +46,14 @@
         content="article">
       <meta 
         property="og:article:published_time" 
-        content="2023-01-31">
+        content="2023-03-27">
       <meta 
         property="og:article:modified_time" 
-        content="2023-02-24">
+        content="2023-03-27">
       <meta 
         property="og:article:author" 
         content="Ricky">
       
-        
-          <meta 
-            property="og:article:tag" 
-            content="dp">
         
       
     
@@ -344,7 +340,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%AA%81%E7%AC%AC%E4%B8%80%E7%AB%A0"><span class="toc-text">🪁第一章</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%BB%99%E5%87%BA%E7%8E%B0%E5%AE%9E%E7%94%9F%E6%B4%BB%E4%B8%AD%E9%9C%80%E8%A6%81%E6%8E%92%E5%BA%8F%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E6%88%96%E8%80%85%E7%8E%B0%E5%AE%9E%E4%B8%AD%E9%9C%80%E8%A6%81%E8%AE%A1%E7%AE%97%E5%87%B8%E5%A3%B3%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="toc-text">1-1 给出现实生活中需要排序的一个例子或者现实中需要计算凸壳的一个例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E9%99%A4%E9%80%9F%E5%BA%A6%E5%A4%96%EF%BC%8C%E5%9C%A8%E7%9C%9F%E5%AE%9E%E7%8E%AF%E5%A2%83%E4%B8%AD%E8%BF%98%E5%8F%AF%E8%83%BD%E4%BD%BF%E7%94%A8%E5%93%AA%E4%BA%9B%E5%85%B6%E4%BB%96%E6%9C%89%E5%85%B3%E6%95%88%E7%8E%87%E7%9A%84%E9%87%8F%E5%BA%A6%EF%BC%9F"><span class="toc-text">1-2 除速度外，在真实环境中还可能使用哪些其他有关效率的量度？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E9%80%89%E6%8B%A9%E4%B8%80%E7%A7%8D%E4%BD%A0%E4%BB%A5%E5%89%8D%E5%B7%B2%E7%9F%A5%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%8C%E5%B9%B6%E8%AE%A8%E8%AE%BA%E5%85%B6%E4%BC%98%E5%8A%BF%E5%92%8C%E5%B1%80%E9%99%90"><span class="toc-text">1-3 选择一种你以前已知的数据结构，并讨论其优势和局限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%89%8D%E9%9D%A2%E7%BB%99%E5%87%BA%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E4%B8%8E%E6%97%85%E8%A1%8C%E5%95%86%E9%97%AE%E9%A2%98%E6%9C%89%E5%93%AA%E4%BA%9B%E7%9B%B8%E4%BC%BC%E4%B9%8B%E5%A4%84%EF%BC%9F%E5%8F%88%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="toc-text">1-4 前面给出的最短路径与旅行商问题有哪些相似之处？又有哪些不同？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AA%E7%8E%B0%E5%AE%9E%E7%94%9F%E6%B4%BB%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%8C%E5%85%B6%E4%B8%AD%E5%8F%AA%E6%9C%89%E6%9C%80%E4%BD%B3%E8%A7%A3%E6%89%8D%E8%A1%8C%E3%80%82%E7%84%B6%E5%90%8E%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%8C%E5%85%B6%E4%B8%AD%E8%BF%91%E4%BC%BC%E6%9C%80%E4%BD%B3%E7%9A%84%E4%B8%80%E4%B8%AA%E8%A7%A3%E4%B9%9F%E8%B6%B3%E5%A4%9F%E5%A5%BD"><span class="toc-text">1-5 提供一个现实生活的问题，其中只有最佳解才行。然后提供一个问题，其中近似最佳的一个解也足够好</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%BB%99%E5%87%BA%E5%9C%A8%E5%BA%94%E7%94%A8%E5%B1%82%E9%9C%80%E8%A6%81%E7%AE%97%E6%B3%95%E5%86%85%E5%AE%B9%E7%9A%84%E5%BA%94%E7%94%A8%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%EF%BC%8C%E5%B9%B6%E8%AE%A8%E8%AE%BA%E6%B6%89%E5%8F%8A%E7%9A%84%E7%AE%97%E6%B3%95%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">2-1 给出在应用层需要算法内容的应用的一个例子，并讨论涉及的算法的功能</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -497,16 +493,16 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      洛谷P1115 Java解法
+      算法导论 课后题
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2023-01-31T15:35:45.000Z">
+    <time datetime="2023-03-27T09:53:32.000Z">
       <i 
         class="iconfont icon-calendar" 
         style="margin-right: 2px;">
       </i>
-      <span>2023-01-31</span>
+      <span>2023-03-27</span>
     </time>
     
       <span class="dot"></span>
@@ -518,61 +514,81 @@
         </a>
       
         <a 
-          href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%B4%9B%E8%B0%B7/" 
+          href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/" 
           class="post-meta-link">
-          洛谷
+          算法导论
         </a>
       
     
     
       <span class="dot"></span>
-      <span>304 字</span>
+      <span>429 字</span>
     
   </div>
-  
-    <div 
-      class="post-meta post-show-meta" 
-      style="margin-top: -10px;">
-      <div style="display: flex; align-items: center;">
-        <i 
-          class="iconfont icon-biaoqian" 
-          style="margin-right: 2px; font-size: 1.15rem;">
-        </i>
-        
-          
-          <a 
-            href="/tags/dp/" 
-            class="post-meta-link">
-            dp
-          </a>
-        
-      </div>
-    </div>
   
   </header>
   <div 
     id="section" 
     class="post-content">
-    <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1115">P1115 最大子段和 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
-<hr>
-<p>完全不会动态规划所以直接抄的题解（悲）</p>
-<p>所以这一篇来分析代码吧！</p>
-<hr>
-<p>题目写得挺诱导人的，我最开始一直在想怎么才能取区间，但其实根本不需要区间只需要最大值（恼）</p>
-<p>这里我们使用边读边算的做法。</p>
-<p>n 是用来接第一个数的，同时也是循环条件。</p>
-<p>a 用来每轮循环读一个数进行计算。</p>
-<p>ans 是要输出的结果，设置初始值为 <code>1 &lt;&lt; 31</code>  的原因是中间有个测试点是负数，不知道位运算是怎么算的直接移步到算法新手班 01 课的笔记吧</p>
-<blockquote>
-<p><a href="http://ricky1140.github.io/2022/12/01/algorithm-00-01/">新手班-01笔记</a></p>
+    <h2 id="🪁第一章"><a href="#🪁第一章" class="headerlink" title="🪁第一章"></a>🪁第一章</h2><h3 id="1-1-给出现实生活中需要排序的一个例子或者现实中需要计算凸壳的一个例子"><a href="#1-1-给出现实生活中需要排序的一个例子或者现实中需要计算凸壳的一个例子" class="headerlink" title="1-1 给出现实生活中需要排序的一个例子或者现实中需要计算凸壳的一个例子"></a>1-1 给出现实生活中需要排序的一个例子或者现实中需要计算凸壳的一个例子</h3><blockquote>
+<p>凸壳：给定平面上的 n 个点，包含这些点的最小的凸多边形。</p>
 </blockquote>
-<p>now 用来记录现在的子段和，并和 ans 比较谁更大。</p>
-<hr>
-<p>以下为完整代码：</p>
-<pre class="highlight"><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">P1115</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">		</span><br><span class="line">		<span class="type">int</span> n;</span><br><span class="line">		<span class="type">int</span> a;</span><br><span class="line">		<span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">1</span> &lt;&lt; <span class="number">31</span>;</span><br><span class="line">		<span class="type">int</span> <span class="variable">now</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		</span><br><span class="line">		n = sc.nextInt();</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line">			a = sc.nextInt();</span><br><span class="line">			now += a;</span><br><span class="line">			<span class="keyword">if</span> (now &gt; ans) ans = now;</span><br><span class="line">			<span class="keyword">if</span> (now &lt; <span class="number">0</span>) now = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		System.out.println(ans);</span><br><span class="line">		</span><br><span class="line">		sc.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre>
-
-<hr>
-<p><del>别偷懒哩快去看课吧（恼）</del></p>
+<ul>
+<li>排序：<ul>
+<li>游戏排行榜</li>
+<li>考试成绩查询</li>
+</ul>
+</li>
+<li>凸壳：<ul>
+<li>图形识别</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-除速度外，在真实环境中还可能使用哪些其他有关效率的量度？"><a href="#1-2-除速度外，在真实环境中还可能使用哪些其他有关效率的量度？" class="headerlink" title="1-2 除速度外，在真实环境中还可能使用哪些其他有关效率的量度？"></a>1-2 除速度外，在真实环境中还可能使用哪些其他有关效率的量度？</h3><ul>
+<li>功率？</li>
+</ul>
+<h3 id="1-3-选择一种你以前已知的数据结构，并讨论其优势和局限"><a href="#1-3-选择一种你以前已知的数据结构，并讨论其优势和局限" class="headerlink" title="1-3 选择一种你以前已知的数据结构，并讨论其优势和局限"></a>1-3 选择一种你以前已知的数据结构，并讨论其优势和局限</h3><ul>
+<li>链表<ul>
+<li>优势：<ul>
+<li>便于插入、删除</li>
+</ul>
+</li>
+<li>劣势：<ul>
+<li>不便于查找</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4-前面给出的最短路径与旅行商问题有哪些相似之处？又有哪些不同？"><a href="#1-4-前面给出的最短路径与旅行商问题有哪些相似之处？又有哪些不同？" class="headerlink" title="1-4 前面给出的最短路径与旅行商问题有哪些相似之处？又有哪些不同？"></a>1-4 前面给出的最短路径与旅行商问题有哪些相似之处？又有哪些不同？</h3><blockquote>
+<p>最短路径：</p>
+<ul>
+<li>找出图中两个顶点间的最短路径</li>
+<li>Dijkstra 算法（迪杰斯特拉）</li>
+<li>蚁群算法</li>
+</ul>
+<p>旅行商问题：</p>
+<ul>
+<li>Traveling Salesman Problem, TSP</li>
+<li>线性规划</li>
+<li>NPC 问题</li>
+<li>假设有一个旅行商人要拜访 N 个城市，他必须选择所要走的路径，路径的限制是每个城市只能拜访一次，而且最后要回到原来出发的城市。路径的选择目标是要求得的路径路程为所有路径之中的最小值</li>
+</ul>
+</blockquote>
+<ul>
+<li>相似：<ul>
+<li>都要找最短的路</li>
+</ul>
+</li>
+<li>不同：<ul>
+<li>后者需要回到起点</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-5-提供一个现实生活的问题，其中只有最佳解才行。然后提供一个问题，其中近似最佳的一个解也足够好"><a href="#1-5-提供一个现实生活的问题，其中只有最佳解才行。然后提供一个问题，其中近似最佳的一个解也足够好" class="headerlink" title="1-5 提供一个现实生活的问题，其中只有最佳解才行。然后提供一个问题，其中近似最佳的一个解也足够好"></a>1-5 提供一个现实生活的问题，其中只有最佳解才行。然后提供一个问题，其中近似最佳的一个解也足够好</h3><p>* </p>
+<h3 id="2-1-给出在应用层需要算法内容的应用的一个例子，并讨论涉及的算法的功能"><a href="#2-1-给出在应用层需要算法内容的应用的一个例子，并讨论涉及的算法的功能" class="headerlink" title="2-1 给出在应用层需要算法内容的应用的一个例子，并讨论涉及的算法的功能"></a>2-1 给出在应用层需要算法内容的应用的一个例子，并讨论涉及的算法的功能</h3><ul>
+<li>FTP，文件传输协议，用来传输文件（曾经的 web 作业用过）</li>
+</ul>
 
   </div>
   <div>
@@ -592,8 +608,8 @@
           <span style="font-weight: bold;">文章链接：</span><a 
             target="_blank" 
             rel="nofollow noopener noreferrer" 
-            href="https://ricky1140.github.io/2023/01/31/luogu-P1115/">
-            https://ricky1140.github.io/2023/01/31/luogu-P1115/
+            href="https://ricky1140.github.io/2023/03/27/Introduction2Algorithms-homework/">
+            https://ricky1140.github.io/2023/03/27/Introduction2Algorithms-homework/
           </a>
         </p>
         <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
@@ -603,29 +619,15 @@
 </article>
 <div class="nav">
   
-    <div class="nav-item-prev">
-      <a 
-        href="/2023/01/31/luogu-P1202/" 
-        class="nav-link">
-        <i class="iconfont icon-left nav-prev-icon"></i>
-        <div>
-          <div class="nav-label">上一篇</div>
-          
-            <div class="nav-title">洛谷P1202 Java解法 </div>
-          
-        </div>
-      </a>
-    </div>
-  
   
     <div class="nav-item-next">
       <a 
-        href="/2023/01/31/luogu-P1097/" 
+        href="/2023/03/21/algorithm-00-02/" 
         class="nav-link">
         <div>
           <div class="nav-label">下一篇</div>
           
-            <div class="nav-title">洛谷P1097 Java解法 </div>
+            <div class="nav-title">新手班-02笔记 </div>
           
         </div>
         <i class="iconfont icon-right nav-next-icon"></i>
@@ -643,7 +645,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%AA%81%E7%AC%AC%E4%B8%80%E7%AB%A0"><span class="toc-text">🪁第一章</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%BB%99%E5%87%BA%E7%8E%B0%E5%AE%9E%E7%94%9F%E6%B4%BB%E4%B8%AD%E9%9C%80%E8%A6%81%E6%8E%92%E5%BA%8F%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E6%88%96%E8%80%85%E7%8E%B0%E5%AE%9E%E4%B8%AD%E9%9C%80%E8%A6%81%E8%AE%A1%E7%AE%97%E5%87%B8%E5%A3%B3%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="toc-text">1-1 给出现实生活中需要排序的一个例子或者现实中需要计算凸壳的一个例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E9%99%A4%E9%80%9F%E5%BA%A6%E5%A4%96%EF%BC%8C%E5%9C%A8%E7%9C%9F%E5%AE%9E%E7%8E%AF%E5%A2%83%E4%B8%AD%E8%BF%98%E5%8F%AF%E8%83%BD%E4%BD%BF%E7%94%A8%E5%93%AA%E4%BA%9B%E5%85%B6%E4%BB%96%E6%9C%89%E5%85%B3%E6%95%88%E7%8E%87%E7%9A%84%E9%87%8F%E5%BA%A6%EF%BC%9F"><span class="toc-text">1-2 除速度外，在真实环境中还可能使用哪些其他有关效率的量度？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E9%80%89%E6%8B%A9%E4%B8%80%E7%A7%8D%E4%BD%A0%E4%BB%A5%E5%89%8D%E5%B7%B2%E7%9F%A5%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%8C%E5%B9%B6%E8%AE%A8%E8%AE%BA%E5%85%B6%E4%BC%98%E5%8A%BF%E5%92%8C%E5%B1%80%E9%99%90"><span class="toc-text">1-3 选择一种你以前已知的数据结构，并讨论其优势和局限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%89%8D%E9%9D%A2%E7%BB%99%E5%87%BA%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E4%B8%8E%E6%97%85%E8%A1%8C%E5%95%86%E9%97%AE%E9%A2%98%E6%9C%89%E5%93%AA%E4%BA%9B%E7%9B%B8%E4%BC%BC%E4%B9%8B%E5%A4%84%EF%BC%9F%E5%8F%88%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="toc-text">1-4 前面给出的最短路径与旅行商问题有哪些相似之处？又有哪些不同？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AA%E7%8E%B0%E5%AE%9E%E7%94%9F%E6%B4%BB%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%8C%E5%85%B6%E4%B8%AD%E5%8F%AA%E6%9C%89%E6%9C%80%E4%BD%B3%E8%A7%A3%E6%89%8D%E8%A1%8C%E3%80%82%E7%84%B6%E5%90%8E%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%8C%E5%85%B6%E4%B8%AD%E8%BF%91%E4%BC%BC%E6%9C%80%E4%BD%B3%E7%9A%84%E4%B8%80%E4%B8%AA%E8%A7%A3%E4%B9%9F%E8%B6%B3%E5%A4%9F%E5%A5%BD"><span class="toc-text">1-5 提供一个现实生活的问题，其中只有最佳解才行。然后提供一个问题，其中近似最佳的一个解也足够好</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%BB%99%E5%87%BA%E5%9C%A8%E5%BA%94%E7%94%A8%E5%B1%82%E9%9C%80%E8%A6%81%E7%AE%97%E6%B3%95%E5%86%85%E5%AE%B9%E7%9A%84%E5%BA%94%E7%94%A8%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%EF%BC%8C%E5%B9%B6%E8%AE%A8%E8%AE%BA%E6%B6%89%E5%8F%8A%E7%9A%84%E7%AE%97%E6%B3%95%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">2-1 给出在应用层需要算法内容的应用的一个例子，并讨论涉及的算法的功能</span></a></li></ol></li></ol>
 </div>
             </main>
             <aside class="right-column">
@@ -657,7 +659,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%AA%81%E7%AC%AC%E4%B8%80%E7%AB%A0"><span class="toc-text">🪁第一章</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%BB%99%E5%87%BA%E7%8E%B0%E5%AE%9E%E7%94%9F%E6%B4%BB%E4%B8%AD%E9%9C%80%E8%A6%81%E6%8E%92%E5%BA%8F%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E6%88%96%E8%80%85%E7%8E%B0%E5%AE%9E%E4%B8%AD%E9%9C%80%E8%A6%81%E8%AE%A1%E7%AE%97%E5%87%B8%E5%A3%B3%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="toc-text">1-1 给出现实生活中需要排序的一个例子或者现实中需要计算凸壳的一个例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E9%99%A4%E9%80%9F%E5%BA%A6%E5%A4%96%EF%BC%8C%E5%9C%A8%E7%9C%9F%E5%AE%9E%E7%8E%AF%E5%A2%83%E4%B8%AD%E8%BF%98%E5%8F%AF%E8%83%BD%E4%BD%BF%E7%94%A8%E5%93%AA%E4%BA%9B%E5%85%B6%E4%BB%96%E6%9C%89%E5%85%B3%E6%95%88%E7%8E%87%E7%9A%84%E9%87%8F%E5%BA%A6%EF%BC%9F"><span class="toc-text">1-2 除速度外，在真实环境中还可能使用哪些其他有关效率的量度？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E9%80%89%E6%8B%A9%E4%B8%80%E7%A7%8D%E4%BD%A0%E4%BB%A5%E5%89%8D%E5%B7%B2%E7%9F%A5%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%8C%E5%B9%B6%E8%AE%A8%E8%AE%BA%E5%85%B6%E4%BC%98%E5%8A%BF%E5%92%8C%E5%B1%80%E9%99%90"><span class="toc-text">1-3 选择一种你以前已知的数据结构，并讨论其优势和局限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%89%8D%E9%9D%A2%E7%BB%99%E5%87%BA%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E4%B8%8E%E6%97%85%E8%A1%8C%E5%95%86%E9%97%AE%E9%A2%98%E6%9C%89%E5%93%AA%E4%BA%9B%E7%9B%B8%E4%BC%BC%E4%B9%8B%E5%A4%84%EF%BC%9F%E5%8F%88%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="toc-text">1-4 前面给出的最短路径与旅行商问题有哪些相似之处？又有哪些不同？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AA%E7%8E%B0%E5%AE%9E%E7%94%9F%E6%B4%BB%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%8C%E5%85%B6%E4%B8%AD%E5%8F%AA%E6%9C%89%E6%9C%80%E4%BD%B3%E8%A7%A3%E6%89%8D%E8%A1%8C%E3%80%82%E7%84%B6%E5%90%8E%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%8C%E5%85%B6%E4%B8%AD%E8%BF%91%E4%BC%BC%E6%9C%80%E4%BD%B3%E7%9A%84%E4%B8%80%E4%B8%AA%E8%A7%A3%E4%B9%9F%E8%B6%B3%E5%A4%9F%E5%A5%BD"><span class="toc-text">1-5 提供一个现实生活的问题，其中只有最佳解才行。然后提供一个问题，其中近似最佳的一个解也足够好</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%BB%99%E5%87%BA%E5%9C%A8%E5%BA%94%E7%94%A8%E5%B1%82%E9%9C%80%E8%A6%81%E7%AE%97%E6%B3%95%E5%86%85%E5%AE%B9%E7%9A%84%E5%BA%94%E7%94%A8%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%EF%BC%8C%E5%B9%B6%E8%AE%A8%E8%AE%BA%E6%B6%89%E5%8F%8A%E7%9A%84%E7%AE%97%E6%B3%95%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="toc-text">2-1 给出在应用层需要算法内容的应用的一个例子，并讨论涉及的算法的功能</span></a></li></ol></li></ol>
     </article>
   
   
