@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta 
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta 
+    http-equiv="X-UA-Compatible" 
+    content="ie=edge">
+  <meta 
+    name="theme-color" 
+    content="#fff" 
+    id="theme-color">
+  <meta 
+    name="description" 
+    content="博客">
+  <link 
+    rel="icon" 
+    href="https://ricky1140.github.io/blog-img/icon.png">
+  <title>C#记录</title>
+  
+    
+      <meta 
+        property="og:title" 
+        content="C#记录">
+    
+    
+      <meta 
+        property="og:url" 
+        content="https://ricky1140.github.io/2024/03/13/cs-note/index.html">
+    
+    
+      <meta 
+        property="og:img" 
+        content="https://ricky1140.github.io/blog-img/ricky2.png">
+    
+    
+      <meta 
+        property="og:img" 
+        content="博客">
+    
+    
+      <meta 
+        property="og:type" 
+        content="article">
+      <meta 
+        property="og:article:published_time" 
+        content="2024-03-13">
+      <meta 
+        property="og:article:modified_time" 
+        content="2024-04-21">
+      <meta 
+        property="og:article:author" 
+        content="Ricky">
+      
+        
+          <meta 
+            property="og:article:tag" 
+            content="C#">
+        
+      
+    
+  
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  <link rel="preload" href="/css/main.css" as="style" >
+  
+  <link rel="modulepreload" href="//instant.page/5.1.0">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+  
+  
+  
+    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+  
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    function loadCSS(href, data, attr) {
+      var sheet = document.createElement('link');
+      sheet.ref = 'stylesheet';
+      sheet.href = href;
+      sheet.dataset[data] = attr;
+      document.head.appendChild(sheet);
+    }
+    function changeCSS(cssFile, data, attr) {
+      var oldlink = document.querySelector(data);
+      var newlink = document.createElement("link");
+      newlink.setAttribute("rel", "stylesheet");
+      newlink.setAttribute("href", cssFile);
+      newlink.dataset.prism = attr;
+      document.head.replaceChild(newlink, oldlink);
+    }
+  </script>
+  
+    
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+  </script>
+  
+    <script>
+      var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+        document.getElementById('theme-color').dataset.mode = getCssMediaQuery();
+      }
+    };
+    setDarkmode();
+    </script>
+  
+  
+  
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <div class="wrapper">
+       
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <a class="navbar-logo-main" href="/">
+      
+        <img 
+          class="navbar-logo-img"
+          width="32"
+          height="32"
+          src="https://ricky1140.github.io/blog-img/icon.png" 
+          alt="blog logo">
+      
+      <span class="navbar-logo-dsc">Rickyの摸鱼小屋</span>
+      </a>
+  </div>
+  <div class="navbar-menu">
+    
+      <a 
+        href="/" 
+        class="navbar-menu-item">
+        
+          首页
+        
+      </a>
+    
+      <a 
+        href="/archives" 
+        class="navbar-menu-item">
+        
+          归档
+        
+      </a>
+    
+      <a 
+        href="/tags" 
+        class="navbar-menu-item">
+        
+          标签
+        
+      </a>
+    
+      <a 
+        href="/categories" 
+        class="navbar-menu-item">
+        
+          分类
+        
+      </a>
+    
+      <a 
+        href="/about" 
+        class="navbar-menu-item">
+        
+          关于
+        
+      </a>
+    
+      <a 
+        href="/links" 
+        class="navbar-menu-item">
+        
+          友链
+        
+      </a>
+    
+      <a 
+        href="/punch" 
+        class="navbar-menu-item">
+        
+          打卡
+        
+      </a>
+    
+    <button 
+      class="navbar-menu-item darknavbar navbar-menu-btn" 
+      aria-label="Toggle dark mode"
+      id="dark">
+      <i class="iconfont icon-weather"></i>
+    </button>
+    <button 
+      class="navbar-menu-item searchnavbar navbar-menu-btn" 
+      aria-label="Toggle search"
+      id="search">
+      <!-- <i 
+        class="iconfont icon-search" 
+        style="font-size: 1.2rem; font-weight: 400;">
+      </i> -->
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+        class="iconify iconify--ion" width="28" height="28" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512">
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M256 80a176 176 0 1 0 176 176A176 176 0 0 0 256 80Z"></path>
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M232 160a72 72 0 1 0 72 72a72 72 0 0 0-72-72Z"></path>
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="28"
+          d="M283.64 283.64L336 336"></path>
+      </svg>
+    </button>
+  </div>
+</nav> 
+      
+      <div 
+        id="local-search" 
+        style="display: none">
+        <input
+          class="navbar-menu-item"
+          id="search-input"
+          placeholder="请输入搜索内容..." />
+        <div id="search-content"></div>
+      </div>
+      
+      <div class="section-wrap">
+        <div class="container">
+          <div class="columns">
+            <aside class="left-column">
+              
+              <div class="card card-author">
+                
+  <img 
+    src="https://ricky1140.github.io/blog-img/ricky2.png" 
+    class="author-img"
+    width="88"
+    height="88"
+    alt="author avatar">
+
+<p class="author-name">Ricky</p>
+<p class="author-description">摸鱼ing</p>
+<div class="author-message">
+  <a 
+    class="author-posts-count" 
+    href="/archives">
+    <span>14</span>
+    <span>文章</span>
+  </a>
+  <a 
+    class="author-categories-count" 
+    href="/categories">
+    <span>9</span>
+    <span>分类</span>
+  </a>
+  <a 
+    class="author-tags-count" 
+    href="/tags">
+    <span>27</span>
+    <span>标签</span>
+  </a>
+</div>
+
+  <div class="author-card-society">
+    
+      <div class="author-card-society-icon">
+        <a target="_blank" rel="noopener" href="https://github.com/Ricky1140">
+          <i class="iconfont icon-github society-icon"></i>
+        </a>
+      </div>
+    
+  </div>
+
+              </div>
+               <div class="sticky-tablet">
+  
+  
+    <article class="display-when-two-columns spacer">
+      <div class="card card-content toc-card">
+        <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-text">- 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E6%B3%A8%E9%87%8A"><span class="toc-text">– 注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E7%B1%BB%E5%9E%8B"><span class="toc-text">– 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E9%95%BF%E5%BA%A6"><span class="toc-text">— 长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">— 类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%88%E8%87%AA%E5%8A%A8%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%89"><span class="toc-text">—- 隐式类型转换（自动类型转换）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E6%98%BE%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%88%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%89"><span class="toc-text">—- 显式类型转换（强制类型转换）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="toc-text">—- 表达式转换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-Convert-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">—- Convert 类型转换</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E6%95%B4%E5%9E%8B"><span class="toc-text">— 整型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E6%B5%AE%E7%82%B9"><span class="toc-text">— 浮点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-char"><span class="toc-text">— char</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-bool"><span class="toc-text">— bool</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-var-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text">— var 关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E5%B8%B8%E9%87%8F"><span class="toc-text">— 常量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="toc-text">– 转义字符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E9%80%90%E5%AD%97%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">— 逐字字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-Unicode-%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="toc-text">— Unicode 转义字符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">– 字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%85%E6%8F%92"><span class="toc-text">— 字符串内插</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-break-%E5%92%8C-continue"><span class="toc-text">– break 和 continue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E6%95%B0%E7%BB%84"><span class="toc-text">– 数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E5%A3%B0%E6%98%8E%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E3%80%81%E8%B5%8B%E5%80%BC%E4%B8%89%E5%90%88%E4%B8%80%E6%A0%BC%E5%BC%8F"><span class="toc-text">— 声明、初始化、赋值三合一格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-foreach-%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84"><span class="toc-text">— foreach 遍历数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%80%BC"><span class="toc-text">— 数组初始值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-text">— 内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-text">—- 值类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-text">—- 引用类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E6%95%B0%E7%BB%84%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-text">—- 数组的内存结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-text">— 二维数组</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E5%9C%A8%E6%B8%B8%E6%88%8F%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">—- 在游戏中的应用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E5%87%BD%E6%95%B0"><span class="toc-text">– 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD"><span class="toc-text">— 函数重载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E9%AB%98%E7%BA%A7%E5%8F%82%E6%95%B0"><span class="toc-text">— 高级参数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E6%99%AE%E9%80%9A%E8%B0%83%E7%94%A8"><span class="toc-text">—- 普通调用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-ref-%E5%8F%82%E6%95%B0"><span class="toc-text">—- ref 参数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-out-%E5%8F%82%E6%95%B0"><span class="toc-text">—- out 参数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E9%80%92%E5%BD%92"><span class="toc-text">— 递归</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5"><span class="toc-text">- 语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Console-WriteLine"><span class="toc-text">– Console.WriteLine()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Console-Write"><span class="toc-text">– Console.Write()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Console-ReadKey"><span class="toc-text">– Console.ReadKey()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Console-ReadLine"><span class="toc-text">– Console.ReadLine()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Convert-ToDouble"><span class="toc-text">– Convert.ToDouble()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Convert-ToInt32"><span class="toc-text">– Convert.ToInt32()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-array-GetLength"><span class="toc-text">– [array].GetLength()</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E4%B8%8E-Length-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">— 与 Length 的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">- 快捷键</span></a></li></ol>
+      </div>
+    </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header">
+    <i 
+      class="iconfont icon-fenlei" 
+      style="padding-right: 2px;">
+    </i>分类
+  </div>
+  <div class="categories-list">
+    
+      <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+        <div class="categories-list-item">
+          数据结构与算法
+          <span class="categories-list-item-badge">10</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%96%B0%E6%89%8B%E7%8F%AD/">
+        <div class="categories-list-item">
+          数据结构与算法/新手班
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/">
+        <div class="categories-list-item">
+          数据结构与算法/算法导论
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E8%AF%AD%E8%A8%80/">
+        <div class="categories-list-item">
+          语言
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E4%BD%9C%E4%B8%9A/">
+        <div class="categories-list-item">
+          作业
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/LeetCode/">
+        <div class="categories-list-item">
+          数据结构与算法/LeetCode
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%B4%9B%E8%B0%B7/">
+        <div class="categories-list-item">
+          数据结构与算法/洛谷
+          <span class="categories-list-item-badge">5</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E8%AF%AD%E8%A8%80/C/">
+        <div class="categories-list-item">
+          语言/C
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Unity/">
+        <div class="categories-list-item">
+          Unity
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header">
+    <i 
+      class="iconfont icon-biaoqian" 
+      style="padding-right: 2px;">
+    </i>热门标签
+  </div>
+  <div class="tags-list">
+    
+      <a 
+        href="/tags/%E7%AE%97%E6%B3%95/" 
+        title="算法">
+        <div class="tags-list-item">算法</div>
+      </a>
+    
+      <a 
+        href="/tags/NGUI/" 
+        title="NGUI">
+        <div class="tags-list-item">NGUI</div>
+      </a>
+    
+      <a 
+        href="/tags/Unity/" 
+        title="Unity">
+        <div class="tags-list-item">Unity</div>
+      </a>
+    
+      <a 
+        href="/tags/%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0/" 
+        title="最小公倍数">
+        <div class="tags-list-item">最小公倍数</div>
+      </a>
+    
+      <a 
+        href="/tags/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%9B%A0%E6%95%B0/" 
+        title="最大公因数">
+        <div class="tags-list-item">最大公因数</div>
+      </a>
+    
+      <a 
+        href="/tags/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/" 
+        title="二维数组">
+        <div class="tags-list-item">二维数组</div>
+      </a>
+    
+      <a 
+        href="/tags/%E6%9E%9A%E4%B8%BE/" 
+        title="枚举">
+        <div class="tags-list-item">枚举</div>
+      </a>
+    
+      <a 
+        href="/tags/dp/" 
+        title="dp">
+        <div class="tags-list-item">dp</div>
+      </a>
+    
+      <a 
+        href="/tags/TreeMap/" 
+        title="TreeMap">
+        <div class="tags-list-item">TreeMap</div>
+      </a>
+    
+      <a 
+        href="/tags/set/" 
+        title="set">
+        <div class="tags-list-item">set</div>
+      </a>
+    
+      <a 
+        href="/tags/map/" 
+        title="map">
+        <div class="tags-list-item">map</div>
+      </a>
+    
+      <a 
+        href="/tags/Morris%E9%81%8D%E5%8E%86/" 
+        title="Morris遍历">
+        <div class="tags-list-item">Morris遍历</div>
+      </a>
+    
+      <a 
+        href="/tags/%E8%BF%AD%E4%BB%A3/" 
+        title="迭代">
+        <div class="tags-list-item">迭代</div>
+      </a>
+    
+      <a 
+        href="/tags/%E9%80%92%E5%BD%92/" 
+        title="递归">
+        <div class="tags-list-item">递归</div>
+      </a>
+    
+      <a 
+        href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" 
+        title="二叉树">
+        <div class="tags-list-item">二叉树</div>
+      </a>
+    
+      <a 
+        href="/tags/ubuntu/" 
+        title="ubuntu">
+        <div class="tags-list-item">ubuntu</div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+            <main class="main-column">
+              
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      C#记录
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2024-03-13T14:34:55.000Z">
+      <i 
+        class="iconfont icon-calendar" 
+        style="margin-right: 2px;">
+      </i>
+      <span>2024-03-13</span>
+    </time>
+    
+      <span class="dot"></span>
+      
+        <a 
+          href="/categories/%E8%AF%AD%E8%A8%80/" 
+          class="post-meta-link">
+          语言
+        </a>
+      
+        <a 
+          href="/categories/%E8%AF%AD%E8%A8%80/C/" 
+          class="post-meta-link">
+          C#
+        </a>
+      
+    
+    
+      <span class="dot"></span>
+      <span>1.7k 字</span>
+    
+  </div>
+  
+    <div 
+      class="post-meta post-show-meta" 
+      style="margin-top: -10px;">
+      <div style="display: flex; align-items: center;">
+        <i 
+          class="iconfont icon-biaoqian" 
+          style="margin-right: 2px; font-size: 1.15rem;">
+        </i>
+        
+          
+          <a 
+            href="/tags/C/" 
+            class="post-meta-link">
+            C#
+          </a>
+        
+      </div>
+    </div>
+  
+  </header>
+  <div 
+    id="section" 
+    class="post-content">
+    <blockquote>
+<p>加油哇加油</p>
+</blockquote>
+<h2 id="基础"><a href="#基础" class="headerlink" title="- 基础"></a>- 基础</h2><h3 id="–-注释"><a href="#–-注释" class="headerlink" title="– 注释"></a>– 注释</h3><pre class="highlight"><span class="line"><span class="comment">// 单行注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 多行注释</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 文档注释</span></span><br></pre>
+
+<ul>
+<li>文档注释会在调用时一起出现在提示内</li>
+</ul>
+<h3 id="–-类型"><a href="#–-类型" class="headerlink" title="– 类型"></a>– 类型</h3><h4 id="—-长度"><a href="#—-长度" class="headerlink" title="— 长度"></a>— 长度</h4><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">int</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">float</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">8</td>
+</tr>
+</tbody></table>
+<ul>
+<li>int &lt; float &lt; double</li>
+</ul>
+<h4 id="—-类型转换"><a href="#—-类型转换" class="headerlink" title="— 类型转换"></a>— 类型转换</h4><h5 id="—-隐式类型转换（自动类型转换）"><a href="#—-隐式类型转换（自动类型转换）" class="headerlink" title="—- 隐式类型转换（自动类型转换）"></a>—- 隐式类型转换（自动类型转换）</h5><ul>
+<li>类型兼容（数值等）</li>
+<li>长度小 -&gt; 长度大</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="built_in">int</span> num1 = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">float</span> num2;</span><br><span class="line"><span class="built_in">double</span> num3;</span><br><span class="line"></span><br><span class="line">num2 = num1;</span><br><span class="line">num3 = num1;</span><br></pre>
+
+
+
+<h5 id="—-显式类型转换（强制类型转换）"><a href="#—-显式类型转换（强制类型转换）" class="headerlink" title="—- 显式类型转换（强制类型转换）"></a>—- 显式类型转换（强制类型转换）</h5><ul>
+<li>类型兼容</li>
+<li>长度大 -&gt; 长度小</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="built_in">float</span> num1 = <span class="number">3.5f</span>;</span><br><span class="line"><span class="built_in">double</span> num2 = <span class="number">3.1415926</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> num3 = (<span class="built_in">int</span>)num1;</span><br><span class="line"><span class="built_in">int</span> num4 = (<span class="built_in">int</span>)num2;</span><br></pre>
+
+
+
+<h5 id="—-表达式转换"><a href="#—-表达式转换" class="headerlink" title="—- 表达式转换"></a>—- 表达式转换</h5><pre class="highlight"><span class="line"><span class="built_in">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">int</span> b = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">float</span> c = <span class="number">10f</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> d = a + b;	<span class="comment">// right</span></span><br><span class="line"><span class="built_in">int</span> e = a + c;	<span class="comment">// fault</span></span><br><span class="line"><span class="built_in">float</span> f = a + c;<span class="comment">// right</span></span><br><span class="line"></span><br></pre>
+
+
+
+<h5 id="—-Convert-类型转换"><a href="#—-Convert-类型转换" class="headerlink" title="—- Convert 类型转换"></a>—- Convert 类型转换</h5><ul>
+<li>类型不兼容（如 string 和 int）</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="built_in">string</span> num1 = <span class="string">&quot;3.15&quot;</span>;</span><br><span class="line"><span class="built_in">string</span> num2 = <span class="string">&quot;198&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">double</span> num3 = Convert.ToDouble(num1);</span><br><span class="line"><span class="built_in">double</span> num4 = Convert.ToInt32(num2);</span><br><span class="line"></span><br><span class="line">Console.WriteLine(num1 + num2);	<span class="comment">// 3.15198</span></span><br><span class="line">Console.Writeline(num3 + num4);	<span class="comment">// 201.15</span></span><br></pre>
+
+<blockquote>
+<p>输入需要数字时</p>
+</blockquote>
+<pre class="highlight"><span class="line">Convert.ToInt32(Console.ReadLine());</span><br></pre>
+
+
+
+<h4 id="—-整型"><a href="#—-整型" class="headerlink" title="— 整型"></a>— 整型</h4><ul>
+<li>-2,147,483,648 ~ 2147843647</li>
+</ul>
+<h4 id="—-浮点"><a href="#—-浮点" class="headerlink" title="— 浮点"></a>— 浮点</h4><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">精度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">float</td>
+<td align="center">~6-9位</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">~15-17位</td>
+</tr>
+<tr>
+<td align="center">decimal</td>
+<td align="center">28-29位</td>
+</tr>
+</tbody></table>
+<ul>
+<li><code>decimal</code> 提供了高精度小数，不会出现浮点数舍入误差，以 <code>m</code> 结尾，通常用在金融计算等高精度计算领域中</li>
+</ul>
+<h4 id="—-char"><a href="#—-char" class="headerlink" title="— char"></a>— char</h4><ul>
+<li>不能存空值</li>
+</ul>
+<h4 id="—-bool"><a href="#—-bool" class="headerlink" title="— bool"></a>— bool</h4><ul>
+<li>值为 true，但输出为 True</li>
+<li>值为 false，但输出为 False</li>
+</ul>
+<h4 id="—-var-关键字"><a href="#—-var-关键字" class="headerlink" title="— var 关键字"></a>— var 关键字</h4><ul>
+<li><code>var</code> 关键字告知 C# 编译器数据类型由分配的值暗示</li>
+<li>暗示类型后不可更改</li>
+<li>必须初始化</li>
+<li>在不熟练前先别用</li>
+</ul>
+<h4 id="—-常量"><a href="#—-常量" class="headerlink" title="— 常量"></a>— 常量</h4><ul>
+<li>const</li>
+<li>命名全大写</li>
+<li>不能二次赋值</li>
+</ul>
+<h3 id="–-转义字符"><a href="#–-转义字符" class="headerlink" title="– 转义字符"></a>– 转义字符</h3><h4 id="—-逐字字符串"><a href="#—-逐字字符串" class="headerlink" title="— 逐字字符串"></a>— 逐字字符串</h4><ul>
+<li>逐字字符串 <code>@</code> 会保留所有的空格和字符，而无需转义反斜杠</li>
+<li>在文本字符串前使用 <code>@</code> 指令</li>
+</ul>
+<h4 id="—-Unicode-转义字符"><a href="#—-Unicode-转义字符" class="headerlink" title="— Unicode 转义字符"></a>— Unicode 转义字符</h4><ul>
+<li><code>\u</code> </li>
+<li>在文本字符串中添加编码字符，然后使用四个字符的代码表示 Unicode (UTF-16) 中的某些字符</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="comment">// Kon&#x27;nichiwa World</span></span><br><span class="line">Console.WriteLine(<span class="string">&quot;\u3053\u3093\u306B\u3061\u306F World!&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// To generate Japanese invoices:</span></span><br><span class="line"><span class="comment">// Nihon no seikyū-sho o seisei suru ni wa:</span></span><br><span class="line">Console.Write(<span class="string">&quot;\n\n\u65e5\u672c\u306e\u8acb\u6c42\u66f8\u3092\u751f\u6210\u3059\u308b\u306b\u306f\uff1a\n\t&quot;</span>);</span><br><span class="line"><span class="comment">// User command to run an application</span></span><br><span class="line">Console.WriteLine(<span class="string">@&quot;c:\invoices\app.exe -j&quot;</span>);</span><br></pre>
+
+
+
+<h3 id="–-字符串"><a href="#–-字符串" class="headerlink" title="– 字符串"></a>– 字符串</h3><h4 id="—-字符串内插"><a href="#—-字符串内插" class="headerlink" title="— 字符串内插"></a>— 字符串内插</h4><pre class="highlight"><span class="line"><span class="built_in">string</span> message = <span class="string">$&quot;<span class="subst">&#123;greeting&#125;</span> <span class="subst">&#123;firstName&#125;</span>!&quot;</span>;</span><br><span class="line"></span><br><span class="line">Console.Writeline(<span class="string">&quot;&#123;0&#125;, &#123;1&#125;&quot;</span>, greeting, firstName);</span><br></pre>
+
+<ul>
+<li>合并逐字文本和字符串内插</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="built_in">string</span> projectName = <span class="string">&quot;First-Project&quot;</span>;</span><br><span class="line">Console.WriteLine(<span class="string">$@&quot;C:\Output\<span class="subst">&#123;projectName&#125;</span>\Data&quot;</span>);</span><br></pre>
+
+
+
+<h3 id="–-break-和-continue"><a href="#–-break-和-continue" class="headerlink" title="– break 和 continue"></a>– break 和 continue</h3><ul>
+<li>break：结束当前循环</li>
+<li>continue：结束本轮循环</li>
+</ul>
+<h3 id="–-数组"><a href="#–-数组" class="headerlink" title="– 数组"></a>– 数组</h3><h4 id="—-声明、初始化、赋值三合一格式"><a href="#—-声明、初始化、赋值三合一格式" class="headerlink" title="— 声明、初始化、赋值三合一格式"></a>— 声明、初始化、赋值三合一格式</h4><pre class="highlight"><span class="line"><span class="built_in">int</span>[] ages = <span class="keyword">new</span> <span class="built_in">int</span>[<span class="number">5</span>] &#123; <span class="number">000</span>, <span class="number">111</span>, <span class="number">222</span>, <span class="number">333</span>, <span class="number">444</span>&#125;;</span><br><span class="line"><span class="comment">// 赋值的数量可以比长度少</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">double</span>[] array = <span class="keyword">new</span> <span class="built_in">double</span>[] &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="comment">// 用赋值的数量自动填写长度</span></span><br></pre>
+
+<h4 id="—-foreach-遍历数组"><a href="#—-foreach-遍历数组" class="headerlink" title="— foreach 遍历数组"></a>— foreach 遍历数组</h4><pre class="highlight"><span class="line"><span class="built_in">int</span>[] intArray = <span class="keyword">new</span> <span class="built_in">int</span>[] &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span>(<span class="built_in">int</span> i <span class="keyword">in</span> intArray)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(i);</span><br><span class="line">&#125;</span><br></pre>
+
+<h4 id="—-数组初始值"><a href="#—-数组初始值" class="headerlink" title="— 数组初始值"></a>— 数组初始值</h4><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">int[]</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">float[]</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">double[]</td>
+<td align="center">0.0</td>
+</tr>
+<tr>
+<td align="center">string[]</td>
+<td align="center">null</td>
+</tr>
+<tr>
+<td align="center">bool[]</td>
+<td align="center">false</td>
+</tr>
+</tbody></table>
+<h4 id="—-内存结构"><a href="#—-内存结构" class="headerlink" title="— 内存结构"></a>— 内存结构</h4><h5 id="—-值类型"><a href="#—-值类型" class="headerlink" title="—- 值类型"></a>—- 值类型</h5><blockquote>
+<p>int, float, double, bool, char</p>
+</blockquote>
+<ul>
+<li>内存：值类型的值存储在<strong>内存的栈</strong>中</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="built_in">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">int</span> b = a;	<span class="comment">// 变量间的传值</span></span><br><span class="line"></span><br><span class="line">b = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">Console.WriteLine(<span class="string">&quot;&#123;0&#125;, &#123;1&#125;&quot;</span>, a, b);</span><br></pre>
+
+<p><img src="https://ricky1140.github.io/blog-img//image-20240413230831344.png" alt="image-20240413230831344" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://ricky1140.github.io/blog-img//image-20240413230831344.png" class="lozad post-image"></p>
+<ul>
+<li>这个时候单独改变 b 的值，a 的值不会改变（把 a 的值拷贝给 b）</li>
+<li>这种传递叫<strong>值传递</strong></li>
+</ul>
+<blockquote>
+<p>简单的说就是地址不是一个，所以不会变</p>
+</blockquote>
+<h5 id="—-引用类型"><a href="#—-引用类型" class="headerlink" title="—- 引用类型"></a>—- 引用类型</h5><blockquote>
+<p>数组，字符串</p>
+</blockquote>
+<ul>
+<li>内存：引用类型的值存储在<strong>内存的堆</strong>中</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="built_in">int</span>[] intA = <span class="keyword">new</span> <span class="built_in">int</span>[] &#123;<span class="number">00</span>,<span class="number">111</span>,<span class="number">222</span>,<span class="number">333</span>,<span class="number">444</span>&#125;;</span><br><span class="line"><span class="built_in">int</span>[] intB = intA;</span><br></pre>
+
+<ul>
+<li>此时单独修改 intb 中元素的值，inta 的值会发生改变</li>
+<li>这种传递叫<strong>引用传递</strong></li>
+</ul>
+<p><img src="https://ricky1140.github.io/blog-img//20240415110636.png" alt="image-20240415110619770" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://ricky1140.github.io/blog-img//20240415110636.png" class="lozad post-image"></p>
+<blockquote>
+<p>初始化 intA时：</p>
+<ul>
+<li>在栈中创建 intA</li>
+<li>在堆中创建 new int[]</li>
+<li>把上述 new int[] 的内存赋值给 intA</li>
+</ul>
+<p>intB &#x3D; intA 就相当于 intB 的值是 intA 的值的拷贝，但 intA 的值是内存，所以更改 intB 也会更改 intA</p>
+<p>因为地址里的东西改了，他俩指向同一个地址</p>
+</blockquote>
+<h5 id="—-数组的内存结构"><a href="#—-数组的内存结构" class="headerlink" title="—- 数组的内存结构"></a>—- 数组的内存结构</h5><ul>
+<li>数组在内存中是一块连续的存储空间存储的</li>
+<li>最低的地址对应第一个元素，最高的地址对应最后一个元素</li>
+</ul>
+<p><img src="https://ricky1140.github.io/blog-img//20240415112939.png" alt="20240415112939" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://ricky1140.github.io/blog-img//20240415112939.png" class="lozad post-image"></p>
+<blockquote>
+<p>栈？</p>
+</blockquote>
+<h4 id="—-二维数组"><a href="#—-二维数组" class="headerlink" title="— 二维数组"></a>— 二维数组</h4><ul>
+<li>内存图如下：</li>
+</ul>
+<p><img src="https://ricky1140.github.io/blog-img/20240415123433.png" alt="20240415123433.png" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://ricky1140.github.io/blog-img/20240415123433.png" class="lozad post-image"></p>
+<ul>
+<li>声明初始化赋值三合一：</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="built_in">int</span>[,] array = <span class="keyword">new</span> <span class="built_in">int</span>[,] &#123;</span><br><span class="line">    &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,</span><br><span class="line">    &#123;<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>&#125;,</span><br><span class="line">    &#123;<span class="number">111</span>,<span class="number">222</span>,<span class="number">333</span>&#125;</span><br><span class="line">&#125;;</span><br></pre>
+
+<ul>
+<li>遍历：</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; array.GetLength(<span class="number">0</span>); i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> j = <span class="number">0</span>; j &lt; array.GetLength(<span class="number">1</span>), j++)</span><br><span class="line">    &#123;</span><br><span class="line">		Console.Write(array[i,j] + <span class="string">&quot;\t&quot;</span>);   </span><br><span class="line">    &#125;</span><br><span class="line">    Console.WriteLine();</span><br><span class="line">&#125;</span><br></pre>
+
+<h5 id="—-在游戏中的应用"><a href="#—-在游戏中的应用" class="headerlink" title="—- 在游戏中的应用"></a>—- 在游戏中的应用</h5><ul>
+<li>存储地图</li>
+</ul>
+<h3 id="–-函数"><a href="#–-函数" class="headerlink" title="– 函数"></a>– 函数</h3><ul>
+<li>调用跟 java 不一样，跟 c 一样</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">FunctionStruct</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Hello();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Hello</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<h4 id="—-函数重载"><a href="#—-函数重载" class="headerlink" title="— 函数重载"></a>— 函数重载</h4><pre class="highlight"><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 定义一个 Add 方法，实现整数、小数相加操作</span></span><br><span class="line">    Console.WriteLine(Add(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">    Console.WriteLine(Add(<span class="number">3.1234</span>, <span class="number">8.5678</span>));</span><br><span class="line">    Console.WriteLine(Add(<span class="number">3</span>, <span class="number">3.14</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="built_in">int</span> <span class="title">Add</span>(<span class="params"><span class="built_in">int</span> a, <span class="built_in">int</span> b</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="built_in">double</span> <span class="title">Add</span>(<span class="params"><span class="built_in">double</span> a, <span class="built_in">double</span> b</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="built_in">double</span> <span class="title">Add</span>(<span class="params"><span class="built_in">int</span> a, <span class="built_in">double</span> b</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre>
+
+<ul>
+<li>参数类型一样：参数数量不一样</li>
+<li>参数数量一样：参数类型不一样</li>
+<li>返回值和重载没关系</li>
+</ul>
+<h4 id="—-高级参数"><a href="#—-高级参数" class="headerlink" title="— 高级参数"></a>— 高级参数</h4><h5 id="—-普通调用"><a href="#—-普通调用" class="headerlink" title="—- 普通调用"></a>—- 普通调用</h5><pre class="highlight"><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">FunctionParam</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 演示：Add(int num)：将一个值自身加10</span></span><br><span class="line">            <span class="built_in">int</span> num = <span class="number">5</span>;</span><br><span class="line">            Add(num);</span><br><span class="line"></span><br><span class="line">            Console.WriteLine(num);	<span class="comment">// 5</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Add</span>(<span class="params"><span class="built_in">int</span> num</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;num_start: &quot;</span> + num);	<span class="comment">//5</span></span><br><span class="line">            num += <span class="number">10</span>;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;num_end: &quot;</span> + num);<span class="comment">//15</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+
+<p><img src="https://ricky1140.github.io/blog-img/20240420212749.png" alt="20240420212749.png" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://ricky1140.github.io/blog-img/20240420212749.png" class="lozad post-image"></p>
+<h5 id="—-ref-参数"><a href="#—-ref-参数" class="headerlink" title="—- ref 参数"></a>—- ref 参数</h5><ul>
+<li>作用<ul>
+<li>将一个变量传入一个函数中进行 “处理”，“处理” 完成后，再将 “处理” 后的值带出函数。</li>
+</ul>
+</li>
+<li>要求<ul>
+<li>函数外必须为变量赋值，而函数内可以不赋值</li>
+</ul>
+</li>
+<li>语法<ul>
+<li>形参和实参前面都要加 ref 关键字</li>
+</ul>
+</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 演示：Add(int num)：将一个值自身加10</span></span><br><span class="line">    <span class="built_in">int</span> num = <span class="number">5</span>;</span><br><span class="line">    Add(<span class="keyword">ref</span> num);</span><br><span class="line"></span><br><span class="line">    Console.WriteLine(num);	<span class="comment">//15</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Add</span>(<span class="params"><span class="keyword">ref</span> <span class="built_in">int</span> num</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">     Console.WriteLine(<span class="string">&quot;num_start: &quot;</span> + num);<span class="comment">//5</span></span><br><span class="line">     num += <span class="number">10</span>;</span><br><span class="line">     Console.WriteLine(<span class="string">&quot;num_end: &quot;</span> + num);	<span class="comment">//15</span></span><br><span class="line">&#125;</span><br></pre>
+
+<ul>
+<li>内存原理</li>
+</ul>
+<p><img src="https://ricky1140.github.io/blog-img/20240420213725.png" alt="20240420213725.png" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://ricky1140.github.io/blog-img/20240420213725.png" class="lozad post-image"></p>
+<h5 id="—-out-参数"><a href="#—-out-参数" class="headerlink" title="—- out 参数"></a>—- out 参数</h5><ul>
+<li>作用<ul>
+<li>一个函数中如果返回多个不同类型的值，就需要用到 out 参数</li>
+</ul>
+</li>
+<li>要求<ul>
+<li>函数外可以不为变量赋值，而函数内必须为其赋值</li>
+</ul>
+</li>
+<li>语法<ul>
+<li>形参和实参前面都要加 out 关键字</li>
+</ul>
+</li>
+</ul>
+<h4 id="—-递归"><a href="#—-递归" class="headerlink" title="— 递归"></a>— 递归</h4><ul>
+<li>内存原理</li>
+</ul>
+<p><img src="https://ricky1140.github.io/blog-img/20240420220756.png" alt="20240420220756.pn" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://ricky1140.github.io/blog-img/20240420220756.png" class="lozad post-image"></p>
+<blockquote>
+<p>基础结束啦，呱唧呱唧呱唧( •̀ ω •́ )✧</p>
+</blockquote>
+<h2 id="语句"><a href="#语句" class="headerlink" title="- 语句"></a>- 语句</h2><h3 id="–-Console-WriteLine"><a href="#–-Console-WriteLine" class="headerlink" title="– Console.WriteLine()"></a>– Console.WriteLine()</h3><h3 id="–-Console-Write"><a href="#–-Console-Write" class="headerlink" title="– Console.Write()"></a>– Console.Write()</h3><h3 id="–-Console-ReadKey"><a href="#–-Console-ReadKey" class="headerlink" title="– Console.ReadKey()"></a>– Console.ReadKey()</h3><h3 id="–-Console-ReadLine"><a href="#–-Console-ReadLine" class="headerlink" title="– Console.ReadLine()"></a>– Console.ReadLine()</h3><h3 id="–-Convert-ToDouble"><a href="#–-Convert-ToDouble" class="headerlink" title="– Convert.ToDouble()"></a>– Convert.ToDouble()</h3><h3 id="–-Convert-ToInt32"><a href="#–-Convert-ToInt32" class="headerlink" title="– Convert.ToInt32()"></a>– Convert.ToInt32()</h3><h3 id="–-array-GetLength"><a href="#–-array-GetLength" class="headerlink" title="– [array].GetLength()"></a>– [array].GetLength()</h3><h4 id="—-与-Length-的区别"><a href="#—-与-Length-的区别" class="headerlink" title="— 与 Length 的区别"></a>— 与 Length 的区别</h4><ul>
+<li>假设这里有个数组：</li>
+</ul>
+<pre class="highlight"><span class="line"><span class="built_in">int</span>[,] array = <span class="keyword">new</span> <span class="built_in">int</span>[,] &#123;</span><br><span class="line">    &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,</span><br><span class="line">    &#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> a = array.Length;</span><br><span class="line"><span class="built_in">int</span> b = array.GetLength(<span class="number">0</span>);</span><br><span class="line"><span class="built_in">int</span> c = array.GetLength(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">Console.WriteLine(a);</span><br><span class="line">Console.WriteLine(b);</span><br><span class="line">Console.WriteLine(c);</span><br></pre>
+
+<ul>
+<li>运行结果如下：</li>
+</ul>
+<p><img src="https://ricky1140.github.io/blog-img/20240415125137.png" alt="20240415125137.png" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://ricky1140.github.io/blog-img/20240415125137.png" class="lozad post-image"></p>
+<blockquote>
+<p>结论：</p>
+<ul>
+<li>Length 不需要括号</li>
+<li>Length &#x3D; 行 * 列</li>
+<li>GetLength(0) &#x3D; 行数</li>
+<li>GetLength(1) &#x3D; 列数</li>
+</ul>
+</blockquote>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="- 快捷键"></a>- 快捷键</h2><table>
+<thead>
+<tr>
+<th align="center">快捷键</th>
+<th align="center">操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Ctrl + }</td>
+<td align="center">匹配大括号、括号</td>
+</tr>
+<tr>
+<td align="center">Ctrl + Shift + S</td>
+<td align="center">保存所有文件和项目</td>
+</tr>
+<tr>
+<td align="center">Ctrl + K，Ctrl + C</td>
+<td align="center">注释选定行</td>
+</tr>
+<tr>
+<td align="center">Ctrl + K，Ctrl + U</td>
+<td align="center">取消选定行的注释</td>
+</tr>
+<tr>
+<td align="center">Ctrl + K，Ctrl + D</td>
+<td align="center">正确对齐所有代码</td>
+</tr>
+<tr>
+<td align="center">F5</td>
+<td align="center">开始调试</td>
+</tr>
+<tr>
+<td align="center">F10</td>
+<td align="center">调试单步执行</td>
+</tr>
+<tr>
+<td align="center">Shift + F5</td>
+<td align="center">停止调试</td>
+</tr>
+</tbody></table>
+
+  </div>
+  <div>
+    
+      <div 
+        class="post-note note-warning copyright" 
+        style="margin-top: 42px">
+        <p>
+          <span style="font-weight: bold;">作者：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="/about">
+            Ricky
+          </a>
+        </p>
+        <p>
+          <span style="font-weight: bold;">文章链接：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="https://ricky1140.github.io/2024/03/13/cs-note/">
+            https://ricky1140.github.io/2024/03/13/cs-note/
+          </a>
+        </p>
+        <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+      </div>
+    
+  </div>
+</article>
+<div class="nav">
+  
+  
+    <div class="nav-item-next">
+      <a 
+        href="/2023/04/26/hadoop/" 
+        class="nav-link">
+        <div>
+          <div class="nav-label">下一篇</div>
+          
+            <div class="nav-title">云计算作业 </div>
+          
+        </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
+      </a>
+    </div>
+  
+</div>
+
+<div 
+  class="card card-content toc-card" 
+  id="mobiletoc">
+  <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-text">- 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E6%B3%A8%E9%87%8A"><span class="toc-text">– 注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E7%B1%BB%E5%9E%8B"><span class="toc-text">– 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E9%95%BF%E5%BA%A6"><span class="toc-text">— 长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">— 类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%88%E8%87%AA%E5%8A%A8%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%89"><span class="toc-text">—- 隐式类型转换（自动类型转换）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E6%98%BE%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%88%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%89"><span class="toc-text">—- 显式类型转换（强制类型转换）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="toc-text">—- 表达式转换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-Convert-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">—- Convert 类型转换</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E6%95%B4%E5%9E%8B"><span class="toc-text">— 整型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E6%B5%AE%E7%82%B9"><span class="toc-text">— 浮点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-char"><span class="toc-text">— char</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-bool"><span class="toc-text">— bool</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-var-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text">— var 关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E5%B8%B8%E9%87%8F"><span class="toc-text">— 常量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="toc-text">– 转义字符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E9%80%90%E5%AD%97%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">— 逐字字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-Unicode-%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="toc-text">— Unicode 转义字符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">– 字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%85%E6%8F%92"><span class="toc-text">— 字符串内插</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-break-%E5%92%8C-continue"><span class="toc-text">– break 和 continue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E6%95%B0%E7%BB%84"><span class="toc-text">– 数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E5%A3%B0%E6%98%8E%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E3%80%81%E8%B5%8B%E5%80%BC%E4%B8%89%E5%90%88%E4%B8%80%E6%A0%BC%E5%BC%8F"><span class="toc-text">— 声明、初始化、赋值三合一格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-foreach-%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84"><span class="toc-text">— foreach 遍历数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%80%BC"><span class="toc-text">— 数组初始值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-text">— 内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-text">—- 值类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-text">—- 引用类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E6%95%B0%E7%BB%84%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-text">—- 数组的内存结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-text">— 二维数组</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E5%9C%A8%E6%B8%B8%E6%88%8F%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">—- 在游戏中的应用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E5%87%BD%E6%95%B0"><span class="toc-text">– 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD"><span class="toc-text">— 函数重载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E9%AB%98%E7%BA%A7%E5%8F%82%E6%95%B0"><span class="toc-text">— 高级参数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E6%99%AE%E9%80%9A%E8%B0%83%E7%94%A8"><span class="toc-text">—- 普通调用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-ref-%E5%8F%82%E6%95%B0"><span class="toc-text">—- ref 参数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-out-%E5%8F%82%E6%95%B0"><span class="toc-text">—- out 参数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E9%80%92%E5%BD%92"><span class="toc-text">— 递归</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5"><span class="toc-text">- 语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Console-WriteLine"><span class="toc-text">– Console.WriteLine()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Console-Write"><span class="toc-text">– Console.Write()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Console-ReadKey"><span class="toc-text">– Console.ReadKey()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Console-ReadLine"><span class="toc-text">– Console.ReadLine()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Convert-ToDouble"><span class="toc-text">– Convert.ToDouble()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Convert-ToInt32"><span class="toc-text">– Convert.ToInt32()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-array-GetLength"><span class="toc-text">– [array].GetLength()</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E4%B8%8E-Length-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">— 与 Length 的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">- 快捷键</span></a></li></ol>
+</div>
+            </main>
+            <aside class="right-column">
+              <div class="sticky-widescreen">
+  
+  
+    <article class="card card-content toc-card">
+      <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-text">- 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E6%B3%A8%E9%87%8A"><span class="toc-text">– 注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E7%B1%BB%E5%9E%8B"><span class="toc-text">– 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E9%95%BF%E5%BA%A6"><span class="toc-text">— 长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">— 类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%88%E8%87%AA%E5%8A%A8%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%89"><span class="toc-text">—- 隐式类型转换（自动类型转换）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E6%98%BE%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%88%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%89"><span class="toc-text">—- 显式类型转换（强制类型转换）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="toc-text">—- 表达式转换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-Convert-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">—- Convert 类型转换</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E6%95%B4%E5%9E%8B"><span class="toc-text">— 整型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E6%B5%AE%E7%82%B9"><span class="toc-text">— 浮点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-char"><span class="toc-text">— char</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-bool"><span class="toc-text">— bool</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-var-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text">— var 关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E5%B8%B8%E9%87%8F"><span class="toc-text">— 常量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="toc-text">– 转义字符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E9%80%90%E5%AD%97%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">— 逐字字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-Unicode-%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="toc-text">— Unicode 转义字符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">– 字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%85%E6%8F%92"><span class="toc-text">— 字符串内插</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-break-%E5%92%8C-continue"><span class="toc-text">– break 和 continue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E6%95%B0%E7%BB%84"><span class="toc-text">– 数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E5%A3%B0%E6%98%8E%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E3%80%81%E8%B5%8B%E5%80%BC%E4%B8%89%E5%90%88%E4%B8%80%E6%A0%BC%E5%BC%8F"><span class="toc-text">— 声明、初始化、赋值三合一格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-foreach-%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84"><span class="toc-text">— foreach 遍历数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%80%BC"><span class="toc-text">— 数组初始值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-text">— 内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-text">—- 值类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-text">—- 引用类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E6%95%B0%E7%BB%84%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-text">—- 数组的内存结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-text">— 二维数组</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E5%9C%A8%E6%B8%B8%E6%88%8F%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">—- 在游戏中的应用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-%E5%87%BD%E6%95%B0"><span class="toc-text">– 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD"><span class="toc-text">— 函数重载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E9%AB%98%E7%BA%A7%E5%8F%82%E6%95%B0"><span class="toc-text">— 高级参数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-%E6%99%AE%E9%80%9A%E8%B0%83%E7%94%A8"><span class="toc-text">—- 普通调用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-ref-%E5%8F%82%E6%95%B0"><span class="toc-text">—- ref 参数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%80%94-out-%E5%8F%82%E6%95%B0"><span class="toc-text">—- out 参数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E9%80%92%E5%BD%92"><span class="toc-text">— 递归</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5"><span class="toc-text">- 语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Console-WriteLine"><span class="toc-text">– Console.WriteLine()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Console-Write"><span class="toc-text">– Console.Write()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Console-ReadKey"><span class="toc-text">– Console.ReadKey()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Console-ReadLine"><span class="toc-text">– Console.ReadLine()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Convert-ToDouble"><span class="toc-text">– Convert.ToDouble()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-Convert-ToInt32"><span class="toc-text">– Convert.ToInt32()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%93-array-GetLength"><span class="toc-text">– [array].GetLength()</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%94-%E4%B8%8E-Length-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">— 与 Length 的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">- 快捷键</span></a></li></ol>
+    </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header">
+    <i 
+      class="iconfont icon-wenzhang_huaban" 
+      style="padding-right: 2px;">
+    </i>最近文章
+  </div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2024-03-13</div>
+        <a href="/2024/03/13/cs-note/"><div class="recent-posts-item-content">C#记录</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-04-26</div>
+        <a href="/2023/04/26/hadoop/"><div class="recent-posts-item-content">云计算作业</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-04-22</div>
+        <a href="/2023/04/22/unity-ngui/"><div class="recent-posts-item-content">NGUI</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-04-11</div>
+        <a href="/2023/04/11/leetcode-144-94-145/"><div class="recent-posts-item-content">LeetCode 二叉树前/中/后序遍历</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+    <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>
+          Copyright ©
+          
+            2020
+          
+          
+                - 
+                2024
+          
+        </span>
+        &nbsp;
+        <a 
+          href="/" 
+          class="footer-link">
+          Rickyの摸鱼小屋
+        </a>
+      </div>
+    </div>
+
+    
+      <div class="footer-dsc">
+        
+          Powered by
+          <a 
+            href="https://hexo.io/" 
+            class="footer-link" 
+            target="_blank" 
+            rel="nofollow noopener noreferrer">
+            &nbsp;Hexo
+          </a>
+        
+        
+          <span>&nbsp;|&nbsp;</span>
+        
+        
+          Theme -
+          <a 
+            href="https://github.com/theme-kaze" 
+            class="footer-link" 
+            target="_blank"
+            rel="nofollow noopener noreferrer">
+            &nbsp;Kaze
+          </a>
+        
+      </div>
+    
+    
+    
+    
+</footer>
+ 
+    
+  <a 
+    role="button" 
+    id="scrollbutton" 
+    class="basebutton" 
+    aria-label="回到顶部">
+    <i class="iconfont icon-arrowleft button-icon"></i>
+  </a>
+
+<a 
+  role="button" 
+  id="menubutton"
+  aria-label="menu button"
+  class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="popbutton" 
+  class="basebutton" 
+  aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="darkbutton" 
+  class="basebutton darkwidget" 
+  aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="searchbutton" 
+  class="basebutton searchwidget" 
+  aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a> 
+     
+     
+     
+      <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img')
+    var i
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a')
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
+      wrapper.setAttribute('aria-label', 'illustration')
+      wrapper.style.cssText =
+        'width: 100%; display: flex; justify-content: center;'
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt
+      wrapper.dataset.nolink = true
+      img[i].before(wrapper)
+      wrapper.append(img[i])
+      var divWrap = document.createElement('div')
+      divWrap.classList.add('gallery')
+      wrapper.before(divWrap)
+      divWrap.append(wrapper)
+    }
+    baguetteBox.run('.gallery')
+  }
+</script>
+<script>
+  loadScript(
+    "/js/lib/lightbox/baguetteBox.min.js",
+    addImgLayout
+  )
+</script>
+ 
+     
+     
+    <script src="/js/main.js"></script> 
+     
+    
+      <script>
+        var addLazyload = function () {
+          var observer = lozad('.lozad', {
+            load: function (el) {
+              el.srcset = el.getAttribute('data-src')
+            },
+            loaded: function (el) {
+              el.classList.add('loaded')
+            },
+          })
+          observer.observe()
+        }
+      </script>
+      <script>
+        loadScript('/js/lib/lozad.min.js', addLazyload)
+      </script>
+    
+    <script src="//instant.page/5.1.0" type="module"
+      integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
+    
+    
+  </body>
+</html>
